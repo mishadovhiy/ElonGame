@@ -1,3 +1,4 @@
-# ElonGame! [PNG image](https://user-images.githubusercontent.com/44978117/229370641-ab44f5d6-b431-4fc2-b2df-e07379164ebd.png)
+# ElonGame! 
 
 
+![PNG image](https://user-images.githubusercontent.com/44978117/229370734-15318d87-98d3-458d-9fe2-7baaf18b0cca.png)
