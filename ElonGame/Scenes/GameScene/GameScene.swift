@@ -14,6 +14,10 @@ class GameScene: SKScene {
     var joystic:SKNode?
     var joysticKnob:SKNode?
     
+    var joysticAction:Bool = false
+    
+    var knobRadius:CGFloat = 50 
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
@@ -31,3 +35,13 @@ class GameScene: SKScene {
 }
 
 
+extension GameScene {
+    func resetKnobPosition() {
+        print("resetKnobPosition")
+        let initPoint = CGPoint(x: 0, y: 0)
+        let moveBack = SKAction.move(to: initPoint, duration: 0.3)
+        moveBack.timingMode = .linear
+        joysticKnob?.run(moveBack)
+        joysticAction = false
+    }
+}
