@@ -48,7 +48,7 @@ extension GameScene {
         super.update(currentTime)
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
-        print(deltaTime, " htgrefdsvfbgrh")
+
         guard let joystickKnob = joystickKnob else { return }
         let xPosition = Double(joystickKnob.position.x)
 
