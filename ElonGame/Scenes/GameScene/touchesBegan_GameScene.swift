@@ -10,20 +10,20 @@ import UIKit
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-   //     super.touchesBegan(touches, with: event)
-        guard let joystic = self.joystic,
-              let knob = joysticKnob else { return }
+        super.touchesBegan(touches, with: event)
+        guard let joystic = self.joystick,
+              let knob = joystickKnob else { return }
         touches.forEach { touch in
             let location = touch.location(in: joystic)
-            joysticAction = knob.frame.contains(location)
+            joystickAction = knob.frame.contains(location)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //    super.touchesMoved(touches, with: event)
-        guard let joystic = self.joystic,
-              let knob = joysticKnob else { return }
-        if !joysticAction { return }
+        super.touchesMoved(touches, with: event)
+        guard let joystic = self.joystick,
+              let knob = joystickKnob else { return }
+        if !joystickAction { return }
         
         touches.forEach { touch in
             let position = touch.location(in: joystic)
@@ -39,28 +39,21 @@ extension GameScene {
     }
     
     func touchEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let _ = self.joystic,
-              let knob = joysticKnob else { return }
+        guard let _ = self.joystick,
+              let knob = joystickKnob else { return }
         if knob.position != .init(x: 0, y: 0) {
             self.resetKnobPosition()
         }
-    /*    touches.forEach { touch in
-            let coordinate = touch.location(in: joystic).x
-            let xLimit:CGFloat = 200
-            if coordinate > -xLimit && coordinate < xLimit {
-                self.resetKnobPosition()
-            }
-            
-        }*/
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-   //      super.touchesEnded(touches, with: event)
+         super.touchesEnded(touches, with: event)
         self.touchEnded(touches, with: event)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //    super.touchesCancelled(touches, with: event)
+        super.touchesCancelled(touches, with: event)
         self.touchEnded(touches, with: event)
     }
 }
+

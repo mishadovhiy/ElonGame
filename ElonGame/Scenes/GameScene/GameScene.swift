@@ -10,78 +10,58 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var player:SKNode?
-    var joystic:SKNode?
-    var joysticKnob:SKNode?
+    var player : SKNode?
+    var joystick : SKNode?
+    var joystickKnob : SKNode?
     
-    var joysticAction:Bool = false
+    var joystickAction = false
     
-    var knobRadius:CGFloat = 50 
+    var knobRadius : CGFloat = 50.0
     
-    var previusTimeInterval:TimeInterval = 0
+    var previousTimeInterval : TimeInterval = 0
     var playerIsFacingRight = true
-    let playerSpeed:Double = 4
-    
-    
-    override func didMove(to view: SKView) {
-        super.didMove(to: view)
+    let playerSpeed = 4.0//:Double
         
-        self.declareUI()
-        print(self.view?.frame.width, " rgtefrdwfvrgt")
-
-    }
-    
-    func declareUI() {
+    override func didMove(to view: SKView) {
+        
         player = childNode(withName: "player")
-        joystic = childNode(withName: "joystic")
-        joysticKnob = joystic?.childNode(withName: "controllIndicator")
+        joystick = childNode(withName: "joystic")
+        joystickKnob = joystick?.childNode(withName: "controllIndicator")
+        
     }
-    
-    
-
 }
-
 
 extension GameScene {
     func resetKnobPosition() {
-        print("resetKnobPosition")
-        let initPoint = CGPoint(x: 0, y: 0)
-        let moveBack = SKAction.move(to: initPoint, duration: 0.1)
+        let initialPoint = CGPoint(x: 0, y: 0)
+        let moveBack = SKAction.move(to: initialPoint, duration: 0.1)
         moveBack.timingMode = .linear
-        joysticKnob?.run(moveBack)
-        joysticAction = false
+        joystickKnob?.run(moveBack)
+        joystickAction = false
     }
 }
 
-
 extension GameScene {
     override func update(_ currentTime: TimeInterval) {
-        let deltaTime:Double = currentTime - previusTimeInterval
-        previusTimeInterval = deltaTime
-        print(deltaTime, " hntgrfedxcfvg")
-        guard let knob = joysticKnob else { return }
-        
-        let xPosition = Double(knob.position.x)
-        let dx = deltaTime * xPosition * playerSpeed
-        let displeisment = CGVector(dx: dx, dy: 0)
-        if displeisment.dx != 0 {
-            print(displeisment.dx, "grfedws")
-        }
-        let move = SKAction.move(by: displeisment, duration: 0)
-        //player?.run(move)
-        
-        
-        let faceAction:SKAction!
+        let deltaTime = currentTime - previousTimeInterval
+        previousTimeInterval = currentTime
+        print(deltaTime, " htgrefdsvfbgrh")
+        guard let joystickKnob = joystickKnob else { return }
+        let xPosition = Double(joystickKnob.position.x)
+
+        let displacement = CGVector(dx: deltaTime * xPosition * playerSpeed, dy: 0)
+        let move = SKAction.move(by: displacement, duration: 0)
+        let faceAction : SKAction!
         let movingRight = xPosition > 0
         let movingLeft = xPosition < 0
         if movingLeft && playerIsFacingRight {
             playerIsFacingRight = false
-            
-            let faceMovement = SKAction.scaleX(to: -1, duration: 0)
+            let faceMovement = SKAction.scaleX(to: -1, duration: 0.0)
             faceAction = SKAction.sequence([move, faceMovement])
-        } else if movingRight && !playerIsFacingRight {
-             playerIsFacingRight = true
-            let faceMovement = SKAction.scaleX(to: 1, duration: 0)
+        }
+        else if movingRight && !playerIsFacingRight {
+            playerIsFacingRight = true
+            let faceMovement = SKAction.scaleX(to: 1, duration: 0.0)
             faceAction = SKAction.sequence([move, faceMovement])
         } else {
             faceAction = move
@@ -89,3 +69,17 @@ extension GameScene {
         player?.run(faceAction)
     }
 }
+
+/**
+ player = childNode(withName: "player")
+ joystic = childNode(withName: "joystic")
+ joysticKnob = joystic?.childNode(withName: "controllIndicator")
+ 
+ 
+ var player : SKNode?
+ var joystick : SKNode?
+ var joystickKnob : SKNode?
+ 
+ // Boolean
+ var joystickAction = false
+ */
