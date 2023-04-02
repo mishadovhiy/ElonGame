@@ -70,50 +70,7 @@ extension GameScene {
             faceAction = move
         }
         player?.run(faceAction)
-      /*  let deltaTime:Double = currentTime - previousTimeInterval ---- coasinf currentTime too big (>7000.000)
-        previousTimeInterval = deltaTime
-        print(deltaTime, " hntgrfedxcfvg")
-        guard let knob = joystickKnob else { return }
-        
-        let xPosition = Double(knob.position.x)
-        let dx = deltaTime * xPosition * playerSpeed
-        let displeisment = CGVector(dx: dx, dy: 0)
-        if displeisment.dx != 0 {
-            print(displeisment.dx, "grfedws")
-        }
-        let move = SKAction.move(by: displeisment, duration: 0)
-        //player?.run(move)
-        
-        
-        let faceAction:SKAction!
-        let movingRight = xPosition > 0
-        let movingLeft = xPosition < 0
-        if movingLeft && playerIsFacingRight {
-            playerIsFacingRight = false
-            
-            let faceMovement = SKAction.scaleX(to: -1, duration: 0)
-            faceAction = SKAction.sequence([move, faceMovement])
-        } else if movingRight && !playerIsFacingRight {
-             playerIsFacingRight = true
-            let faceMovement = SKAction.scaleX(to: 1, duration: 0)
-            faceAction = SKAction.sequence([move, faceMovement])
-        } else {
-            faceAction = move
-        }
-        player?.run(faceAction)*/
     }
 }
 
-/**
- player = childNode(withName: "player")
- joystic = childNode(withName: "joystic")
- joysticKnob = joystic?.childNode(withName: "controllIndicator")
- 
- 
- var player : SKNode?
- var joystick : SKNode?
- var joystickKnob : SKNode?
- 
- // Boolean
- var joystickAction = false
- */
+
