@@ -22,6 +22,8 @@ class GameScene: SKScene {
     var playerIsFacingRight = true
     let playerSpeed:Double = 4.0
 
+    var playerState:GKStateMachine!
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
@@ -29,6 +31,7 @@ class GameScene: SKScene {
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
 
+        playerState = GKStateMachine(states: [JumpingState(playerNode: self.player!)])
     }
 
 }

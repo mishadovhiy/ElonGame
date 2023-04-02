@@ -16,6 +16,12 @@ extension GameScene {
         touches.forEach { touch in
             let location = touch.location(in: joystic)
             joystickAction = knob.frame.contains(location)
+            
+            
+            let joysticLocation = touch.location(in: self)
+            if !joystic.contains(joysticLocation) {
+                playerState.enter(JumpingState.self)
+            }
         }
     }
     
