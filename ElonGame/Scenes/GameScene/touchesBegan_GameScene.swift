@@ -10,7 +10,7 @@ import UIKit
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+   //     super.touchesBegan(touches, with: event)
         guard let joystic = self.joystic,
               let knob = joysticKnob else { return }
         touches.forEach { touch in
@@ -20,7 +20,7 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
+    //    super.touchesMoved(touches, with: event)
         guard let joystic = self.joystic,
               let knob = joysticKnob else { return }
         if !joysticAction { return }
@@ -55,12 +55,12 @@ extension GameScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-         super.touchesEnded(touches, with: event)
+   //      super.touchesEnded(touches, with: event)
         self.touchEnded(touches, with: event)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
+    //    super.touchesCancelled(touches, with: event)
         self.touchEnded(touches, with: event)
     }
 }

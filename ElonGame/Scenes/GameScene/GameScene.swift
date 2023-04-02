@@ -46,7 +46,7 @@ extension GameScene {
     func resetKnobPosition() {
         print("resetKnobPosition")
         let initPoint = CGPoint(x: 0, y: 0)
-        let moveBack = SKAction.move(to: initPoint, duration: 0.3)
+        let moveBack = SKAction.move(to: initPoint, duration: 0.1)
         moveBack.timingMode = .linear
         joysticKnob?.run(moveBack)
         joysticAction = false
@@ -56,8 +56,7 @@ extension GameScene {
 
 extension GameScene {
     override func update(_ currentTime: TimeInterval) {
-        super.update(currentTime)
-        let deltaTime:Double = 1//currentTime - previusTimeInterval
+        let deltaTime:Double = currentTime - previusTimeInterval
         previusTimeInterval = deltaTime
         print(deltaTime, " hntgrfedxcfvg")
         guard let knob = joysticKnob else { return }
@@ -68,7 +67,7 @@ extension GameScene {
         if displeisment.dx != 0 {
             print(displeisment.dx, "grfedws")
         }
-        let move = SKAction.move(by: displeisment, duration: 1)
+        let move = SKAction.move(by: displeisment, duration: 0)
         //player?.run(move)
         
         
