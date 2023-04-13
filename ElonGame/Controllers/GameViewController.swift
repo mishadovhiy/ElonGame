@@ -11,11 +11,15 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    static var shared:GameViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
+        GameViewController.shared = self
+        loadScene()
+    }
+
+    func loadScene() {
         if let scene = GKScene(fileNamed: "GameScene") {
             
             // Get the SKScene from the loaded GKScene
@@ -39,8 +43,9 @@ class GameViewController: UIViewController {
                 }
             }
         }
-    }
 
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
@@ -51,5 +56,11 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    @IBAction func reloadPressed(_ sender: Any) {
+        AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
+            self.loadScene()
+        })), title: "restart the game", description: "are you sure you want to restart?")
     }
 }

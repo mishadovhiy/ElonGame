@@ -13,7 +13,7 @@ class GameScene: SKScene {
     var player : SKNode?
     var joystick : SKNode?
     var joystickKnob : SKNode?
-    
+    var cameraNode:SKCameraNode?
     var joystickAction = false
     
     var knobRadius : CGFloat = 50.0
@@ -30,7 +30,7 @@ class GameScene: SKScene {
         player = childNode(withName: "player")
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
-
+        cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
         playerState = GKStateMachine(states: [
             JumpingState(playerNode: self.player!),
             WalkingState(playerNode: self.player!),
@@ -59,6 +59,11 @@ extension GameScene {
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
 
+        cameraNode?.position.x = player?.position.x ?? 0
+        let camPos = cameraNode?.position ?? .init(x: 0, y: 0)
+        joystick?.position = .init(x: camPos.x - 300,
+                                   y: camPos.y - 100)
+        
         guard let joystickKnob = joystickKnob else { return }
         let xPosition = Double(joystickKnob.position.x)
         let positivePos = xPosition < 0 ? -xPosition : xPosition
