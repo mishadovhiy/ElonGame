@@ -29,7 +29,8 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        
+        physicsWorld.contactDelegate = self
+         
         player = childNode(withName: "player")
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
@@ -41,8 +42,6 @@ class GameScene: SKScene {
         moon = childNode(withName: "moon")
         stars = childNode(withName: "stars")
 
-
-        
         playerState = GKStateMachine(states: [
             JumpingState(playerNode: self.player!),
             WalkingState(playerNode: self.player!),
