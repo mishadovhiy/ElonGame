@@ -17,9 +17,9 @@ extension GameScene {
             let location = touch.location(in: joystic)
             joystickAction = knob.frame.contains(location)
             
-            
             let joysticLocation = touch.location(in: self)
             if !joystic.contains(joysticLocation) {
+                jumpTouched = true
                 playerState.enter(JumpingState.self)
             }
         }
@@ -30,7 +30,6 @@ extension GameScene {
         guard let joystic = self.joystick,
               let knob = joystickKnob else { return }
         if !joystickAction { return }
-        
         touches.forEach { touch in
             let position = touch.location(in: joystic)
             let lenght = sqrt(pow(position.y, 2) + pow(position.x, 2))
@@ -48,7 +47,11 @@ extension GameScene {
         guard let _ = self.joystick,
               let knob = joystickKnob else { return }
         if knob.position != .init(x: 0, y: 0) {
-            self.resetKnobPosition()
+            if jumpTouched {
+                jumpTouched = false
+            } else {
+                self.resetKnobPosition()
+            }
         }
     }
     

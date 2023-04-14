@@ -50,13 +50,16 @@ class GameScene: SKScene {
             StunnedState(playerNode: self.player!)
         ])
         playerState.enter(IdleState.self)
-        
+        if let state = playerState.currentState as? PlayerState {
+            state.delegate = self
+        }
         
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { _ in
             self.spawnMeteor()
         })
     }
 
+    var jumpTouched = false
 }
 
 extension GameScene {
@@ -71,3 +74,8 @@ extension GameScene {
 
 
 
+extension GameScene:PlayerStateProtocol {
+    func endJumping() {
+        self.jumpTouched = false
+    }
+}

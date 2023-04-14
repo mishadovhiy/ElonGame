@@ -13,9 +13,13 @@ class PlayerSTateKeys {
 
 }
 
-
+protocol PlayerStateProtocol {
+    func endJumping()
+}
 class PlayerState:GKState {
     unowned var playerNode:SKNode
+    var stateNum:Int = 0
+    var delegate:PlayerStateProtocol?
     init(playerNode: SKNode) {
         self.playerNode = playerNode
         super.init()
@@ -36,11 +40,13 @@ class JumpingState:PlayerState {
         print("jumpingg")
         self.playerNode.removeAction(forKey: PlayerSTateKeys.characterAnimationKey)
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
-        
+        self.stateNum = 2
         hasFinnished = false
         playerNode.run(.applyForce(CGVector(dx: 0, dy: 350), duration: 0.1))
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {_ in
             self.hasFinnished = true
+            self.stateNum = 3
+            self.delegate?.endJumping()
         })
     }
 }
@@ -55,6 +61,7 @@ class LandingState:PlayerState {
     }
     
     override func didEnter(from previousState: GKState?) {
+        self.stateNum = 4
         stateMachine?.enter(IdleState.self)
     }
 }
@@ -71,6 +78,7 @@ class IdleState:PlayerState {
     lazy var action = { SKAction.animate(with: [self.textrures], timePerFrame: 0.1) }()
     
     override func didEnter(from previousState: GKState?) {
+        self.stateNum = 0
         self.playerNode.removeAction(forKey: PlayerSTateKeys.characterAnimationKey)
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
     }
@@ -88,6 +96,7 @@ class WalkingState:PlayerState {
     lazy var action = { SKAction.repeatForever(.animate(with: self.textures, timePerFrame: 0.1)) }()
 
     override func didEnter(from previousState: GKState?) {
+        self.stateNum = 0
         self.playerNode.removeAction(forKey: PlayerSTateKeys.characterAnimationKey)
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
     }
