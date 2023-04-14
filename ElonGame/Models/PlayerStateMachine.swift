@@ -25,8 +25,8 @@ class PlayerState:GKState {
 class JumpingState:PlayerState {
     var hasFinnished:Bool = false
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
- //       if hasFinnished && stateClass is LandingState.Type { return true }
-        return true
+        if hasFinnished && stateClass is LandingState.Type { return true }
+        return false
     }
     let textures: Array<SKTexture> = (0..<2).compactMap({ SKTexture.init(imageNamed: "jump/\($0)")})
     lazy var action = { SKAction.animate(with: self.textures, timePerFrame: 0.1) }()

@@ -50,6 +50,11 @@ class GameScene: SKScene {
             StunnedState(playerNode: self.player!)
         ])
         playerState.enter(IdleState.self)
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { _ in
+            self.spawnMeteor()
+        })
     }
 
 }
