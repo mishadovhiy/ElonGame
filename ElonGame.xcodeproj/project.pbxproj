@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D11F00929E8D1370088E3D4 /* update_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11F00829E8D1370088E3D4 /* update_GameScene.swift */; };
 		8D61738129D9ECDB008F6607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738029D9ECDB008F6607 /* AppDelegate.swift */; };
 		8D61738329D9ECDB008F6607 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738229D9ECDB008F6607 /* GameScene.sks */; };
 		8D61738529D9ECDB008F6607 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738429D9ECDB008F6607 /* Actions.sks */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D11F00829E8D1370088E3D4 /* update_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = update_GameScene.swift; sourceTree = "<group>"; };
 		8D61737D29D9ECDB008F6607 /* ElonGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElonGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D61738029D9ECDB008F6607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D61738229D9ECDB008F6607 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				8D61738629D9ECDB008F6607 /* GameScene.swift */,
 				8D86DAC029D9FE8900961C2F /* touchesBegan_GameScene.swift */,
+				8D11F00829E8D1370088E3D4 /* update_GameScene.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				8D86DAC629DA237E00961C2F /* PlayerStateMachine.swift in Sources */,
 				8DD9BA8829E77C6E001A667D /* IndicatorViewAppearence.swift in Sources */,
 				8D86DAC129D9FE8900961C2F /* touchesBegan_GameScene.swift in Sources */,
+				8D11F00929E8D1370088E3D4 /* update_GameScene.swift in Sources */,
 				8D61738129D9ECDB008F6607 /* AppDelegate.swift in Sources */,
 				8DD9BA8629E77C6E001A667D /* AlertViewLibrary.swift in Sources */,
 			);
