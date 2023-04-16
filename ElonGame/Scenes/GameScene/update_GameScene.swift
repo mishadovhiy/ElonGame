@@ -17,7 +17,6 @@ extension GameScene {
 
         moveCamera()
         moveBackground()
-        
         movePlayer(deltaTime)
     }
     
@@ -31,7 +30,7 @@ extension GameScene {
         } else {
             playerState.enter(IdleState.self)
         }
-        
+        rewardNotTouched = true
         let displacement = CGVector(dx: deltaTime * xPosition * playerSpeed, dy: 0)
         let move = SKAction.move(by: displacement, duration: 0)
         let faceAction : SKAction!

@@ -17,6 +17,7 @@
 		8D61738C29D9ECDB008F6607 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738A29D9ECDB008F6607 /* Main.storyboard */; };
 		8D61738E29D9ECDC008F6607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738D29D9ECDC008F6607 /* Assets.xcassets */; };
 		8D61739129D9ECDC008F6607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738F29D9ECDC008F6607 /* LaunchScreen.storyboard */; };
+		8D76E08829EC679F00F99923 /* SKPhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76E08729EC679F00F99923 /* SKPhysicsContact.swift */; };
 		8D86DAC129D9FE8900961C2F /* touchesBegan_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D86DAC029D9FE8900961C2F /* touchesBegan_GameScene.swift */; };
 		8D86DAC629DA237E00961C2F /* PlayerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D86DAC529DA237E00961C2F /* PlayerStateMachine.swift */; };
 		8DD9BA8629E77C6E001A667D /* AlertViewLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD9BA8029E77C6E001A667D /* AlertViewLibrary.swift */; };
@@ -38,6 +39,7 @@
 		8D61738B29D9ECDB008F6607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D61738D29D9ECDC008F6607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D61739029D9ECDC008F6607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8D76E08729EC679F00F99923 /* SKPhysicsContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhysicsContact.swift; sourceTree = "<group>"; };
 		8D86DAC029D9FE8900961C2F /* touchesBegan_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = touchesBegan_GameScene.swift; sourceTree = "<group>"; };
 		8D86DAC529DA237E00961C2F /* PlayerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateMachine.swift; sourceTree = "<group>"; };
 		8DD9BA8029E77C6E001A667D /* AlertViewLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewLibrary.swift; sourceTree = "<group>"; };
@@ -86,8 +88,25 @@
 				8D61738D29D9ECDC008F6607 /* Assets.xcassets */,
 				8D61738F29D9ECDC008F6607 /* LaunchScreen.storyboard */,
 				8D86DAC729DA238B00961C2F /* Models */,
+				8D76E08A29EC67AB00F99923 /* Mics */,
 			);
 			path = ElonGame;
+			sourceTree = "<group>";
+		};
+		8D76E08929EC67A400F99923 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8D76E08729EC679F00F99923 /* SKPhysicsContact.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8D76E08A29EC67AB00F99923 /* Mics */ = {
+			isa = PBXGroup;
+			children = (
+				8D76E08929EC67A400F99923 /* Extensions */,
+			);
+			path = Mics;
 			sourceTree = "<group>";
 		};
 		8D86DABF29D9FE6800961C2F /* GameScene */ = {
@@ -230,6 +249,7 @@
 			files = (
 				8DD9BA8729E77C6E001A667D /* Appearence.swift in Sources */,
 				8D61738729D9ECDB008F6607 /* GameScene.swift in Sources */,
+				8D76E08829EC679F00F99923 /* SKPhysicsContact.swift in Sources */,
 				8DD9BA8929E77C6E001A667D /* ExtensionIndicatorView.swift in Sources */,
 				8D61738929D9ECDB008F6607 /* GameViewController.swift in Sources */,
 				8D86DAC629DA237E00961C2F /* PlayerStateMachine.swift in Sources */,

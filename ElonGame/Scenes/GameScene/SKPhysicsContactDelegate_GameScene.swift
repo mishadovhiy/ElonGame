@@ -35,14 +35,21 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         
         if collisions.matches(.ground, .killing) {
-            if contact.bodyA.node?.name == "meteor",
-                let meteor = contact.bodyA.node {
-                self.createMolten(at: meteor.position)
-                meteor.removeFromParent()
-            } else if contact.bodyB.node?.name == "meteor",
-                      let meteor = contact.bodyB.node {
-                self.createMolten(at: meteor.position)
-                meteor.removeFromParent()
+            if let node = contact.matched(name: "meteor") {
+                self.createMolten(at: node.position)
+                node.removeFromParent()
+            }
+        }
+        
+        if collisions.matches(.player, .reward) {
+            if let node = contact.matched(name: "jewel") {
+                node.physicsBody?.categoryBitMask = 0
+                node.removeFromParent()
+            }
+
+            if rewardNotTouched {
+                rewardNotTouched = false
+                reqardTouched()
             }
         }
     }

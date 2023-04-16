@@ -20,10 +20,15 @@ class GameScene: SKScene {
     var stars:SKNode?
     var moon:SKNode?
     
+    let scoreLabel:SKLabelNode = .init()
+    var score:Int = 0
+    
     var joystickAction = false
+    var rewardNotTouched = true
+    var playerIsFacingRight = true
+
     var knobRadius : CGFloat = 50.0
     var previousTimeInterval : TimeInterval = 0
-    var playerIsFacingRight = true
     let playerSpeed:Double = 4.0
     var playerState:GKStateMachine!
     
@@ -57,6 +62,15 @@ class GameScene: SKScene {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { _ in
             self.spawnMeteor()
         })
+        
+        
+        scoreLabel.position = .init(x: (self.cameraNode?.position.x ?? 0) + 310, y: 140)
+        scoreLabel.fontColor = .orange
+        scoreLabel.fontSize = 24
+        scoreLabel.fontName = "AvenirNext-Bold"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.text = "\(score)"
+        addChild(scoreLabel )
     }
 
     var jumpTouched = false
@@ -69,6 +83,11 @@ extension GameScene {
         moveBack.timingMode = .linear
         joystickKnob?.run(moveBack)
         joystickAction = false
+    }
+    
+    func reqardTouched() {
+        self.score += 1
+        self.scoreLabel.text = "\(score)"
     }
 }
 
