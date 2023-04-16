@@ -24,6 +24,8 @@ extension GameScene {
             if !joystic.contains(joysticLocation) {
                 jumpTouched = true
                 playerState.enter(JumpingState.self)
+                
+
             }
         }
     }
@@ -58,6 +60,7 @@ extension GameScene {
             if jumpTouched {
                 self.touching = true
                 jumpTouched = false
+                self.joystickAction = true
             } else {
                 self.resetKnobPosition()
             }

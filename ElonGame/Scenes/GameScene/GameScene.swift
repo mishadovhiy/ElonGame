@@ -29,7 +29,6 @@ class GameScene: SKScene {
     var joystickAction = false
     var rewardNotTouched = true
     var playerIsFacingRight = true
-
     var knobRadius : CGFloat = 50.0
     var previousTimeInterval : TimeInterval = 0
     let playerSpeed:Double = 4.0

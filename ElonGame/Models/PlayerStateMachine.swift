@@ -10,7 +10,7 @@ import GameplayKit
 
 class PlayerSTateKeys {
     static let characterAnimationKey = "Sprite Animation"
-
+    
 }
 
 protocol PlayerStateProtocol {
@@ -28,7 +28,17 @@ class PlayerState:GKState {
 
 class JumpingState:PlayerState {
     var hasFinnished:Bool = false
+    var secondJump = false
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass is JumpingState.Type && !secondJump {
+            print("JumpingState")
+            secondJump = true
+            playerNode.run(.applyForce(CGVector(dx: 0, dy: 350), duration: 0.1))
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: {_ in
+                self.secondJump = false
+            })
+            return false
+                                 }
         if stateClass is StunnedState.Type { return true }
 
         if hasFinnished && stateClass is LandingState.Type { return true }
@@ -36,7 +46,6 @@ class JumpingState:PlayerState {
     }
     let textures: Array<SKTexture> = (0..<2).compactMap({ SKTexture.init(imageNamed: "jump/\($0)")})
     lazy var action = { SKAction.animate(with: self.textures, timePerFrame: 0.1) }()
-
     
     override func didEnter(from previousState: GKState?) {
         print("jumpingg")
@@ -45,7 +54,7 @@ class JumpingState:PlayerState {
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
         self.stateNum = 2
         hasFinnished = false
-        playerNode.run(.applyForce(CGVector(dx: 0, dy: 350), duration: 0.1))
+        playerNode.run(.applyForce(CGVector(dx: 0, dy: 400), duration: 0.1))
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {_ in
             self.hasFinnished = true
             self.stateNum = 3
@@ -97,7 +106,7 @@ class WalkingState:PlayerState {
     
     let textures: Array<SKTexture> = (0..<6).compactMap({ SKTexture.init(imageNamed: "player/\($0)")})
     lazy var action = { SKAction.repeatForever(.animate(with: self.textures, timePerFrame: 0.1)) }()
-
+    
     override func didEnter(from previousState: GKState?) {
         self.stateNum = 0
         self.playerNode.removeAction(forKey: PlayerSTateKeys.characterAnimationKey)
@@ -112,9 +121,9 @@ class StunnedState:PlayerState {
         .wait(forDuration: 0.25),
         .fadeAlpha(to: 1.0, duration: 0.01),
         .wait(forDuration: 0.25),
-        ]), count: 5)
+    ]), count: 5)
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-
+        
         if isStunned { return false }
         switch stateClass {
             
@@ -125,11 +134,11 @@ class StunnedState:PlayerState {
     
     override func didEnter(from previousState: GKState?) {
         isStunned = true
-
-            playerNode.run(action)
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
-                self.isStunned = false
-                self.stateMachine?.enter(IdleState.self)
-            }
+        
+        playerNode.run(action)
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
+            self.isStunned = false
+            self.stateMachine?.enter(IdleState.self)
+        }
     }
 }
