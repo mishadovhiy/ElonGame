@@ -52,6 +52,12 @@ extension GameScene:SKPhysicsContactDelegate {
                 reqardTouched()
             }
         }
+        
+        if collisions.matches(.player, .killing) {
+            loseHeart()
+            isHit = true
+            playerState.enter(StunnedState.self)
+        }
     }
     
 }

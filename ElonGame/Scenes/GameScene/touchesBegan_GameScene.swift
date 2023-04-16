@@ -10,6 +10,9 @@ import UIKit
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesBegan")
+
+        touching = true
         super.touchesBegan(touches, with: event)
         guard let joystic = self.joystick,
               let knob = joystickKnob else { return }
@@ -26,6 +29,9 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesMoved")
+
+        touching = true
         super.touchesMoved(touches, with: event)
         guard let joystic = self.joystick,
               let knob = joystickKnob else { return }
@@ -44,14 +50,19 @@ extension GameScene {
     }
     
     func touchEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchEnded")
+        touching = false
         guard let _ = self.joystick,
               let knob = joystickKnob else { return }
         if knob.position != .init(x: 0, y: 0) {
             if jumpTouched {
+                self.touching = true
                 jumpTouched = false
             } else {
                 self.resetKnobPosition()
             }
+        } else {
+            jumpTouched = false
         }
     }
     
