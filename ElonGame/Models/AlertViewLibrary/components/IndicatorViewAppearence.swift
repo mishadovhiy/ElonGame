@@ -12,7 +12,7 @@ import UIKit
 extension AlertViewLibrary {
     func setBacground(higlight:Bool, ai:Bool) {
         
-        DispatchQueue.main.async {
+       // DispatchQueue.main.async {
             let higlighten = {
                 UIView.animate(withDuration: 0.3) {
                     self.backgroundView.backgroundColor = ai ? self.appearence.colors.normal.background : self.appearence.colors.accent.background
@@ -30,7 +30,7 @@ extension AlertViewLibrary {
                 higlighten()
             }
             
-        }
+    //    }
     }
     
     enum ImagePosition:Int {
@@ -100,7 +100,7 @@ extension AlertViewLibrary {
     }
     
     func buttonStyle(_ button:UIButton, type:Button) {
-        DispatchQueue.main.async {
+       // DispatchQueue.main.async {
             button.setTitleColor(self.buttonToColor(type.style), for: .normal)
             button.setTitle(type.title, for: .normal)
             button.backgroundColor = self.buttonBackground(type.style)
@@ -111,7 +111,7 @@ extension AlertViewLibrary {
             if button.superview?.isHidden != false {
                 button.superview?.isHidden = false
             }
-        }
+   //     }
     }
     
     private func buttonToFont(_ type:ButtonType) -> UIFont {
