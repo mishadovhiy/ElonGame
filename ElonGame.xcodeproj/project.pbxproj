@@ -22,6 +22,7 @@
 		8D378FDC29F66BFD000179D2 /* Extensions_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FDB29F66BFD000179D2 /* Extensions_GameScene.swift */; };
 		8D378FDF29F66D94000179D2 /* Level2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FDE29F66D94000179D2 /* Level2.swift */; };
 		8D378FE329F66F07000179D2 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FE229F66F07000179D2 /* Level2.sks */; };
+		8D378FE729F7168B000179D2 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FE629F7168B000179D2 /* Sounds.swift */; };
 		8D61738129D9ECDB008F6607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738029D9ECDB008F6607 /* AppDelegate.swift */; };
 		8D61738329D9ECDB008F6607 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738229D9ECDB008F6607 /* Level1.sks */; };
 		8D61738729D9ECDB008F6607 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738629D9ECDB008F6607 /* GameScene.swift */; };
@@ -55,6 +56,7 @@
 		8D378FDB29F66BFD000179D2 /* Extensions_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_GameScene.swift; sourceTree = "<group>"; };
 		8D378FDE29F66D94000179D2 /* Level2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level2.swift; sourceTree = "<group>"; };
 		8D378FE229F66F07000179D2 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level2.sks; sourceTree = "<group>"; };
+		8D378FE629F7168B000179D2 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		8D61737D29D9ECDB008F6607 /* ElonGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElonGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D61738029D9ECDB008F6607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D61738229D9ECDB008F6607 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				8DD9BA7F29E77C6E001A667D /* AlertViewLibrary */,
 				8D86DAC529DA237E00961C2F /* PlayerStateMachine.swift */,
+				8D378FE629F7168B000179D2 /* Sounds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				8D86DAC629DA237E00961C2F /* PlayerStateMachine.swift in Sources */,
 				8DD9BA8829E77C6E001A667D /* IndicatorViewAppearence.swift in Sources */,
 				8D378FDC29F66BFD000179D2 /* Extensions_GameScene.swift in Sources */,
+				8D378FE729F7168B000179D2 /* Sounds.swift in Sources */,
 				8D86DAC129D9FE8900961C2F /* touchesBegan_GameScene.swift in Sources */,
 				8D11F00B29E8D1F00088E3D4 /* SKPhysicsContactDelegate_GameScene.swift in Sources */,
 				8D11F00929E8D1370088E3D4 /* update_GameScene.swift in Sources */,

@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
 
     static var shared:GameViewController?
     var currentScene:Int = 0
-    
+    var scene:GameScene?
     override func viewDidLoad() {
         super.viewDidLoad()
         GameViewController.shared = self
@@ -23,6 +23,7 @@ class GameViewController: UIViewController {
     func loadScene() {
         if let scene = GKScene(fileNamed: "Level1") {
             if let sceneNode = scene.rootNode as! GameScene? {
+                self.scene = sceneNode
                 sceneNode.scaleMode = .aspectFill
                 if let view = self.view as! SKView? {
                     self.currentScene = 1
@@ -50,6 +51,7 @@ class GameViewController: UIViewController {
     
     @IBAction func reloadPressed(_ sender: Any) {
         AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
+            self.scene?.removeAllActions()
             self.loadScene()
         })), title: "restart the game", description: "are you sure you want to restart?")
     }

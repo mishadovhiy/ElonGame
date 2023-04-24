@@ -12,9 +12,11 @@ extension GameScene:SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         let collisions = Collisions(masks: (first: contact.bodyA.categoryBitMask, second: contact.bodyB.categoryBitMask))
+        
         if collisions.matches(.player, .killing) {
             let die = SKAction.move(to: .init(x: -300, y: -100), duration: 0)
             player?.run(die)
+            run(Sound.hit.action)
         }
         
         if collisions.matches(.player, .ground) {
@@ -26,6 +28,7 @@ extension GameScene:SKPhysicsContactDelegate {
             if let node = contact.matched(name: "meteor") {
                 self.createMolten(at: node.position)
                 node.removeFromParent()
+                run(Sound.meteorFalling.action)
             }
         }
         
@@ -39,6 +42,8 @@ extension GameScene:SKPhysicsContactDelegate {
                 rewardNotTouched = false
                 reqardTouched()
             }
+            
+            run(Sound.reward.action)
         }
         
         if collisions.matches(.player, .killing) {

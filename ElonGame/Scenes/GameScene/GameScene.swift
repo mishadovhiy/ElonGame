@@ -41,7 +41,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         physicsWorld.contactDelegate = self
-         
+        
         player = childNode(withName: "player")
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
@@ -89,8 +89,14 @@ class GameScene: SKScene {
         heartContainer.zPosition = 5
         cameraNode?.addChild(heartContainer)
         fillHearts(count: 5)
+        
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
+            self.run(SKAction.playGameMusic)
+
+        })
     }
 
+    
     var jumpTouched = false
     
     func showDieScene() {
@@ -99,16 +105,23 @@ class GameScene: SKScene {
         self.removeAllActions()
     }
     
-    func checkNextScene() {
-        if score >= self.rewardCount {
+    func checkNextScene(force:Bool = false) {
+        if score >= self.rewardCount || force  {
             print("scsscenee\nscore:\(score) rewardCount:\(rewardCount)")
-            GameViewController.shared?.currentScene += 1
+            if force {
+                GameViewController.shared?.currentScene = 1
+            } else {
+                GameViewController.shared?.currentScene += 1
+            }
             if let next = GameScene(fileNamed: "Level\(GameViewController.shared?.currentScene ?? 0)")
             {
+                self.removeAllActions()
+                self.run(Sound.levelUp.action)
                 next.scaleMode = .aspectFill
                 self.view?.presentScene(next)
             } else {
                 GameViewController.shared?.currentScene = 0
+                self.checkNextScene(force: true)
                 print("no more scenes")
             }
         }
