@@ -19,7 +19,7 @@ extension GameScene {
         moveBackground()
         movePlayer(deltaTime)
         
-        checkNextScene()
+        
     }
     
     
@@ -58,6 +58,8 @@ extension GameScene {
         let camPos = cameraNode?.position ?? .init(x: 0, y: 0)
         joystick?.position = .init(x: camPos.x - 300,
                                    y: camPos.y - 100)
+        
+        scoreLabel.position = .init(x: camPos.x - 310, y: camPos.y - 140)
     }
     
     private func moveBackground() {

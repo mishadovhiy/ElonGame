@@ -10,9 +10,9 @@ import GameplayKit
 
 extension SKPhysicsContact {
     func matched(name:String) -> SKNode? {
-        if self.bodyA.node?.name == "meteor" {
+        if self.bodyA.node?.name == name {
             return self.bodyA.node
-        } else if self.bodyB.node?.name == "meteor" {
+        } else if self.bodyB.node?.name == name {
             return self.bodyB.node
         } else {
             return nil

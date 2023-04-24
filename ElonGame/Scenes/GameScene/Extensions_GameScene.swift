@@ -21,6 +21,9 @@ extension GameScene {
         self.score += 1
         print("scoreeee: ", score)
         self.scoreLabel.text = "\(score)"
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
+            self.checkNextScene()
+        })
     }
     
     func fillHearts(count: Int) {

@@ -33,17 +33,24 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         
         if collisions.matches(.player, .reward) {
-            if let node = contact.matched(name: "jewel") {
-                node.physicsBody?.categoryBitMask = 0
-                node.removeFromParent()
+            if let node = contact.matched(name: "jewel") as? JewelNode {
+                if !node.touched {
+                    node.touched = true
+                    node.physicsBody?.categoryBitMask = 0
+                    node.removeFromParent()
+                    
+                    reqardTouched()
+                    
+                    run(Sound.reward.action)
+                }
+                
             }
 
-            if rewardNotTouched {
-                rewardNotTouched = false
-                reqardTouched()
-            }
+         //   if rewardNotTouched {
+           //     rewardNotTouched = false
+                
+           // }
             
-            run(Sound.reward.action)
         }
         
         if collisions.matches(.player, .killing) {

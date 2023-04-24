@@ -11,7 +11,6 @@ extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesBegan")
-
         touching = true
         super.touchesBegan(touches, with: event)
         guard let joystic = self.joystick,

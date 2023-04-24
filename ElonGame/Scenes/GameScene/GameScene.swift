@@ -91,7 +91,9 @@ class GameScene: SKScene {
         fillHearts(count: 5)
         
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
-            self.run(SKAction.playGameMusic)
+            DispatchQueue.main.async {
+                self.run(SKAction.playGameMusic)
+            }
 
         })
     }
@@ -106,8 +108,8 @@ class GameScene: SKScene {
     }
     
     func checkNextScene(force:Bool = false) {
+        print("scssceneewded\nscore:\(score) rewardCount:\(rewardCount)")
         if score >= self.rewardCount || force  {
-            print("scsscenee\nscore:\(score) rewardCount:\(rewardCount)")
             if force {
                 GameViewController.shared?.currentScene = 1
             } else {
@@ -115,10 +117,10 @@ class GameScene: SKScene {
             }
             if let next = GameScene(fileNamed: "Level\(GameViewController.shared?.currentScene ?? 0)")
             {
-                self.removeAllActions()
                 self.run(Sound.levelUp.action)
                 next.scaleMode = .aspectFill
                 self.view?.presentScene(next)
+                self.removeAllActions()
             } else {
                 GameViewController.shared?.currentScene = 0
                 self.checkNextScene(force: true)
