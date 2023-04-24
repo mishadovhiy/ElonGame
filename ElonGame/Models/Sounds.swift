@@ -17,5 +17,5 @@ enum Sound: String {
 }
 
 extension SKAction {
-    static let playGameMusic:SKAction = .repeatForever(.playSoundFileNamed("music.wav", waitForCompletion: true))
+    //static let playGameMusic:SKAction = .repeatForever(.playSoundFileNamed("music.wav", waitForCompletion: true))
 }

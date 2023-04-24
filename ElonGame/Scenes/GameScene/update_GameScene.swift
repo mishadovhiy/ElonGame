@@ -59,7 +59,8 @@ extension GameScene {
         joystick?.position = .init(x: camPos.x - 300,
                                    y: camPos.y - 100)
         
-        scoreLabel.position = .init(x: camPos.x - 310, y: camPos.y - 140)
+        
+        scoreLabel.position = .init(x: camPos.x + 310, y: camPos.y + 140)
     }
     
     private func moveBackground() {

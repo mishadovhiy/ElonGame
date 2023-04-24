@@ -37,9 +37,14 @@ class GameScene: SKScene {
     
     var rewardCount:Int = 0
     var currentScene:Int = 0
+    private var backgroundPlayer:AudioPlayer?
+    var presenting:Bool = false
+    var jumpTouched = false
+
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
+        presenting = true
         physicsWorld.contactDelegate = self
         
         player = childNode(withName: "player")
@@ -71,8 +76,12 @@ class GameScene: SKScene {
             state.delegate = self
         }
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { _ in
-            self.spawnMeteor()
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { timer in
+            if self.presenting {
+                self.spawnMeteor()
+            } else {
+                timer.invalidate()
+            }
         })
         
         
@@ -90,21 +99,27 @@ class GameScene: SKScene {
         cameraNode?.addChild(heartContainer)
         fillHearts(count: 5)
         
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
-            DispatchQueue.main.async {
-                self.run(SKAction.playGameMusic)
-            }
-
-        })
+        self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
+        self.backgroundPlayer?.playSound()
+        self.backgroundPlayer?.numberOfLoops = -1
     }
 
     
-    var jumpTouched = false
+    override func removeFromParent() {
+        super.removeFromParent()
+        presenting = false
+        self.removeAllChildren()
+        self.removeAllActions()
+        backgroundPlayer?.stop()
+    }
+    
+    
     
     func showDieScene() {
         let scene = GameScene(fileNamed: "GameOver")
-        self.view?.presentScene(scene)
         self.removeAllActions()
+        self.view?.presentScene(scene)
+        
     }
     
     func checkNextScene(force:Bool = false) {
@@ -120,7 +135,8 @@ class GameScene: SKScene {
                 self.run(Sound.levelUp.action)
                 next.scaleMode = .aspectFill
                 self.view?.presentScene(next)
-                self.removeAllActions()
+                self.removeFromParent()
+                
             } else {
                 GameViewController.shared?.currentScene = 0
                 self.checkNextScene(force: true)
