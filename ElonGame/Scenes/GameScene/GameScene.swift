@@ -34,6 +34,10 @@ class GameScene: SKScene {
     let playerSpeed:Double = 4.0
     var playerState:GKStateMachine!
     var touching = false
+    
+    var rewardCount:Int = 0
+    var currentScene:Int = 0
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         physicsWorld.contactDelegate = self
@@ -48,6 +52,12 @@ class GameScene: SKScene {
         mount3 = childNode(withName: "mount3")
         moon = childNode(withName: "moon")
         stars = childNode(withName: "stars")
+
+        
+        enumerateChildNodes(withName: "jewel", using: {_,_ in
+            self.rewardCount += 1
+        })
+        print("rewardCount: ", rewardCount)
 
         playerState = GKStateMachine(states: [
             JumpingState(playerNode: self.player!),
@@ -87,6 +97,21 @@ class GameScene: SKScene {
         let scene = GameScene(fileNamed: "GameOver")
         self.view?.presentScene(scene)
         self.removeAllActions()
+    }
+    
+    func checkNextScene() {
+        if score >= self.rewardCount {
+            print("scsscenee\nscore:\(score) rewardCount:\(rewardCount)")
+            GameViewController.shared?.currentScene += 1
+            if let next = GameScene(fileNamed: "Level\(GameViewController.shared?.currentScene ?? 0)")
+            {
+                next.scaleMode = .aspectFill
+                self.view?.presentScene(next)
+            } else {
+                GameViewController.shared?.currentScene = 0
+                print("no more scenes")
+            }
+        }
     }
 }
 

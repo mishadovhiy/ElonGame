@@ -9,6 +9,7 @@ import SpriteKit
 
 class Level2:GameScene {
     override func didMove(to view: SKView) {
+        self.currentScene = 2
         super.didMove(to: view)
     }
 }

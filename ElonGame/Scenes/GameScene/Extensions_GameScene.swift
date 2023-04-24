@@ -19,6 +19,7 @@ extension GameScene {
     
     func reqardTouched() {
         self.score += 1
+        print("scoreeee: ", score)
         self.scoreLabel.text = "\(score)"
     }
     

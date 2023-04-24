@@ -10,18 +10,6 @@ import GameplayKit
 
 extension GameScene:SKPhysicsContactDelegate {
     
-    struct Collisions {
-        enum Mask:Int {
-            case killing, player, reward, ground
-            var bitmask:UInt32 { 1 << self.rawValue }
-        }
-        let masks:(first:UInt32, second:UInt32)
-        func matches(_ first:Mask, _ second:Mask) -> Bool {
-            return (first.bitmask == self.masks.first && second.bitmask == self.masks.second) || (first.bitmask == self.masks.second && second.bitmask == self.masks.first)
-        }
-        
-    }
-    
     func didBegin(_ contact: SKPhysicsContact) {
         let collisions = Collisions(masks: (first: contact.bodyA.categoryBitMask, second: contact.bodyB.categoryBitMask))
         if collisions.matches(.player, .killing) {
@@ -58,6 +46,19 @@ extension GameScene:SKPhysicsContactDelegate {
             isHit = true
             playerState.enter(StunnedState.self)
         }
+    }
+    
+    
+    struct Collisions {
+        enum Mask:Int {
+            case killing, player, reward, ground
+            var bitmask:UInt32 { 1 << self.rawValue }
+        }
+        let masks:(first:UInt32, second:UInt32)
+        func matches(_ first:Mask, _ second:Mask) -> Bool {
+            return (first.bitmask == self.masks.first && second.bitmask == self.masks.second) || (first.bitmask == self.masks.second && second.bitmask == self.masks.first)
+        }
+        
     }
     
 }

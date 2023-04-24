@@ -18,6 +18,8 @@ extension GameScene {
         moveCamera()
         moveBackground()
         movePlayer(deltaTime)
+        
+        checkNextScene()
     }
     
     

@@ -12,6 +12,7 @@ import GameplayKit
 class GameViewController: UIViewController {
 
     static var shared:GameViewController?
+    var currentScene:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class GameViewController: UIViewController {
             if let sceneNode = scene.rootNode as! GameScene? {
                 sceneNode.scaleMode = .aspectFill
                 if let view = self.view as! SKView? {
+                    self.currentScene = 1
                     view.presentScene(sceneNode)
                     view.ignoresSiblingOrder = false
                     view.showsFPS = true
