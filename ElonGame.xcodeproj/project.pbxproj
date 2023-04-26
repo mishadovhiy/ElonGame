@@ -25,6 +25,7 @@
 		8D378FE729F7168B000179D2 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FE629F7168B000179D2 /* Sounds.swift */; };
 		8D378FE929F72B3C000179D2 /* JewelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FE829F72B3C000179D2 /* JewelNode.swift */; };
 		8D378FEC29F73A21000179D2 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FEB29F73A21000179D2 /* AudioPlayer.swift */; };
+		8D37C4F029F9D95C006A5633 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D37C4EF29F9D95C006A5633 /* PlayerNode.swift */; };
 		8D61738129D9ECDB008F6607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738029D9ECDB008F6607 /* AppDelegate.swift */; };
 		8D61738329D9ECDB008F6607 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738229D9ECDB008F6607 /* Level1.sks */; };
 		8D61738729D9ECDB008F6607 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738629D9ECDB008F6607 /* GameScene.swift */; };
@@ -61,6 +62,7 @@
 		8D378FE629F7168B000179D2 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		8D378FE829F72B3C000179D2 /* JewelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelNode.swift; sourceTree = "<group>"; };
 		8D378FEB29F73A21000179D2 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		8D37C4EF29F9D95C006A5633 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		8D61737D29D9ECDB008F6607 /* ElonGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElonGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D61738029D9ECDB008F6607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D61738229D9ECDB008F6607 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				8D378FE829F72B3C000179D2 /* JewelNode.swift */,
+				8D37C4EF29F9D95C006A5633 /* PlayerNode.swift */,
 			);
 			path = "Custom Nodes";
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				8D378FE929F72B3C000179D2 /* JewelNode.swift in Sources */,
 				8D378FEC29F73A21000179D2 /* AudioPlayer.swift in Sources */,
 				8D378FE729F7168B000179D2 /* Sounds.swift in Sources */,
+				8D37C4F029F9D95C006A5633 /* PlayerNode.swift in Sources */,
 				8D86DAC129D9FE8900961C2F /* touchesBegan_GameScene.swift in Sources */,
 				8D11F00B29E8D1F00088E3D4 /* SKPhysicsContactDelegate_GameScene.swift in Sources */,
 				8D11F00929E8D1370088E3D4 /* update_GameScene.swift in Sources */,

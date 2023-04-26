@@ -37,21 +37,22 @@ extension GameScene {
     }
     
     func loseHeart() {
-        if isHit == true {
-                let lastElementIndex = heartsArray.count - 1
-                if heartsArray.indices.contains(lastElementIndex - 1) {
-                    let lastHeart = heartsArray[lastElementIndex]
-                    lastHeart.removeFromParent()
-                    heartsArray.remove(at: lastElementIndex)
-                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-                        self.isHit = false
-                    }
+        if isHit {
+            let lastElementIndex = heartsArray.count - 1
+            if heartsArray.indices.contains(lastElementIndex - 1) {
+                let lastHeart = heartsArray[lastElementIndex]
+                lastHeart.removeFromParent()
+                heartsArray.remove(at: lastElementIndex)
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+                    self.isHit = false
+                    self.falledOut = false
                 }
-                else {
-                    dying()
-                }
-                invincible()
             }
+            else {
+                dying()
+            }
+            invincible()
+        }
     }
     
     func invincible() {
@@ -62,6 +63,7 @@ extension GameScene {
     }
     
     func dying() {
+        GameViewController.shared?.scene = nil
         let dieAction = SKAction.move(to: CGPoint(x: -300, y: 0), duration: 0.1)
         player?.run(dieAction)
         self.removeAllActions()

@@ -10,7 +10,7 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var player : SKNode?
+    var player : PlayerNode?
     var joystick : SKNode?
     var joystickKnob : SKNode?
     var cameraNode:SKCameraNode?
@@ -27,11 +27,9 @@ class GameScene: SKScene {
     var isHit = false
     
     var joystickAction = false
-    var rewardNotTouched = true
     var playerIsFacingRight = true
     var knobRadius : CGFloat = 50.0
     var previousTimeInterval : TimeInterval = 0
-    let playerSpeed:Double = 4.0
     var playerState:GKStateMachine!
     var touching = false
     
@@ -47,7 +45,8 @@ class GameScene: SKScene {
         presenting = true
         physicsWorld.contactDelegate = self
         
-        player = childNode(withName: "player")
+        player = childNode(withName: "player") as? PlayerNode
+        print(player!.walkingSpeed)
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
         cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
@@ -143,6 +142,12 @@ class GameScene: SKScene {
                 print("no more scenes")
             }
         }
+    }
+    var falledOut = false
+    func hitted() {
+        isHit = true
+        loseHeart()
+        playerState.enter(StunnedState.self)
     }
 }
 

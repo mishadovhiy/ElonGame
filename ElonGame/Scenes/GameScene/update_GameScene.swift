@@ -19,7 +19,10 @@ extension GameScene {
         moveBackground()
         movePlayer(deltaTime)
         
-        
+        if player?.position.y ?? 0 <= -5000 && !falledOut {
+            self.falledOut = true
+            self.hitted()
+        }
     }
     
     
@@ -32,8 +35,7 @@ extension GameScene {
         } else {
             playerState.enter(IdleState.self)
         }
-        rewardNotTouched = true
-        let displacement = CGVector(dx: deltaTime * xPosition * playerSpeed, dy: 0)
+        let displacement = CGVector(dx: deltaTime * xPosition * (player?.walkingSpeed ?? 0), dy: 0)
         let move = SKAction.move(by: displacement, duration: 0)
         let faceAction : SKAction!
         let movingRight = xPosition > 0

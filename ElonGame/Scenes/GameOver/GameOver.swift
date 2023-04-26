@@ -12,6 +12,7 @@ class GameOverScene:SKScene {
         super.sceneDidLoad()
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {_ in
             let scene = GameScene(fileNamed: "Level1")
+            GameViewController.shared?.scene = scene
             self.view?.presentScene(scene)
             self.removeAllActions()
             

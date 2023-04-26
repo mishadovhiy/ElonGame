@@ -38,25 +38,16 @@ extension GameScene:SKPhysicsContactDelegate {
                     node.touched = true
                     node.physicsBody?.categoryBitMask = 0
                     node.removeFromParent()
-                    
                     reqardTouched()
-                    
                     run(Sound.reward.action)
                 }
                 
             }
-
-         //   if rewardNotTouched {
-           //     rewardNotTouched = false
-                
-           // }
             
         }
         
         if collisions.matches(.player, .killing) {
-            loseHeart()
-            isHit = true
-            playerState.enter(StunnedState.self)
+            self.hitted()
         }
     }
     
@@ -81,7 +72,6 @@ extension  GameScene {
         let node = SKSpriteNode(imageNamed: "meteor")
         node.name = "meteor"
         let camPos = camera?.position
-        print(camPos, " huiknbh")
         let x = Int(camPos?.x ?? 0)
         let wi = Int(self.size.width)
         let isMinus = x <= 0

@@ -51,9 +51,11 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func reloadPressed(_ sender: Any) {
-        AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
-            self.scene?.removeFromParent()
-            self.loadScene()
-        })), title: "restart the game", description: "are you sure you want to restart?")
+        if let scene = scene {
+            AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
+                scene.dying()
+            })), title: "restart the game", description: "are you sure you want to restart?")
+        }
+        
     }
 }
