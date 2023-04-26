@@ -80,8 +80,15 @@ extension  GameScene {
     func spawnMeteor() {
         let node = SKSpriteNode(imageNamed: "meteor")
         node.name = "meteor"
-        let randomXPosition = Int(arc4random_uniform(UInt32(self.size.width)))
-        node.position = .init(x: randomXPosition, y: 270)
+        let camPos = camera?.position
+        print(camPos, " huiknbh")
+        let x = Int(camPos?.x ?? 0)
+        let wi = Int(self.size.width)
+        let isMinus = x <= 0
+        let xr = isMinus ? x * -1 : x
+        let randomXPosition = Int.random(in: xr..<(wi + xr))
+        //Int(arc4random_uniform(UInt32(self.size.width)))
+        node.position = .init(x: randomXPosition * (isMinus ? -1 : 1), y: 270)
         node.anchorPoint = .init(x: 0.5, y: 1)
         node.zPosition = 5
         
@@ -93,8 +100,8 @@ extension  GameScene {
         phBody.affectedByGravity = true
         phBody.allowsRotation = false
         phBody.restitution = 0.2
-        phBody.friction = 10
-        
+        phBody.friction = 1.0
+    
         node.physicsBody = phBody
         
         addChild(node)

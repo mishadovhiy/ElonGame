@@ -106,18 +106,18 @@ class GameScene: SKScene {
 
     
     override func removeFromParent() {
-        super.removeFromParent()
         presenting = false
-        self.removeAllChildren()
         self.removeAllActions()
         backgroundPlayer?.stop()
+        self.removeAllChildren()
+        super.removeFromParent()
     }
     
     
     
     func showDieScene() {
         let scene = GameScene(fileNamed: "GameOver")
-        self.removeAllActions()
+        self.removeFromParent()
         self.view?.presentScene(scene)
         
     }
