@@ -12,16 +12,16 @@ extension GameScene:SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         let collisions = Collisions(masks: (first: contact.bodyA.categoryBitMask, second: contact.bodyB.categoryBitMask))
+
         
-        if collisions.matches(.player, .killing) {
-            let die = SKAction.move(to: .init(x: -300, y: -100), duration: 0)
-            player?.run(die)
-            run(Sound.hit.action)
-        }
         
         if collisions.matches(.player, .ground) {
             playerState.enter(LandingState.self)
-            
+            if let node = contact.matched(name: "flour") {
+                if node.intName != currentFloour {
+                    currentFloour = node.intName
+                }
+            }
         }
         
         if collisions.matches(.ground, .killing) {
@@ -33,13 +33,15 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         
         if collisions.matches(.player, .reward) {
-            if let node = contact.matched(name: "jewel") as? JewelNode {
-                if !node.touched {
-                    node.touched = true
-                    node.physicsBody?.categoryBitMask = 0
-                    node.removeFromParent()
-                    reqardTouched()
-                    run(Sound.reward.action)
+            if let node = contact.matched(name: "jewel") as? JewelNode,
+               !node.touched
+            {
+                if let _ = node as? JewelSpeed {
+                    if player?.startSuperSpeed() ?? false {
+                        removeJewel(node)
+                    }
+                } else {
+                    removeJewel(node)
                 }
                 
             }
@@ -50,6 +52,7 @@ extension GameScene:SKPhysicsContactDelegate {
             self.hitted()
         }
     }
+    
     
     
     struct Collisions {

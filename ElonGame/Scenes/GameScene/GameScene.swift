@@ -39,7 +39,7 @@ class GameScene: SKScene {
     var presenting:Bool = false
     var jumpTouched = false
 
-    
+    var currentFloour:Int = 0
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         presenting = true
@@ -149,6 +149,7 @@ class GameScene: SKScene {
         loseHeart()
         playerState.enter(StunnedState.self)
     }
+    
 }
 
 

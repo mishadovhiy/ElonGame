@@ -70,6 +70,14 @@ extension GameScene {
         fillHearts(count: 3)
         self.showDieScene()
     }
+    
+    func removeJewel(_ node:JewelNode) {
+        node.touched = true
+        node.physicsBody?.categoryBitMask = 0
+        node.removeFromParent()
+        reqardTouched()
+        run(Sound.reward.action)
+    }
 }
 
 
