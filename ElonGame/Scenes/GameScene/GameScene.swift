@@ -19,6 +19,8 @@ class GameScene: SKScene {
     var mount2:SKNode?
     var stars:SKNode?
     var moon:SKNode?
+    var flour:SKNode?
+
     var heartsArray = [SKSpriteNode]()
     let heartContainer = SKSpriteNode()
     let scoreLabel:SKLabelNode = .init()
@@ -56,7 +58,7 @@ class GameScene: SKScene {
         mount3 = childNode(withName: "mount3")
         moon = childNode(withName: "moon")
         stars = childNode(withName: "stars")
-
+        self.flour = childNode(withName: "flour")
         
         enumerateChildNodes(withName: "jewel", using: {_,_ in
             self.rewardCount += 1

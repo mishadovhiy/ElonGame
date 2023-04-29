@@ -57,6 +57,12 @@ extension GameScene {
     
     private func moveCamera() {
         cameraNode?.position.x = player?.position.x ?? 0
+        let min:CGFloat = -20
+        let y = player?.position.y ?? 0
+        cameraNode?.position.y = min >= y ? min : y
+        print(cameraNode?.position.y, " hujikolp")
+        print(flour?.position.y, " gvhujikl")
+        print(flour?.frame.height, " hgrfeds")
         let camPos = cameraNode?.position ?? .init(x: 0, y: 0)
         joystick?.position = .init(x: camPos.x - 300,
                                    y: camPos.y - 100)
