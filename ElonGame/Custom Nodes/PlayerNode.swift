@@ -43,12 +43,18 @@ class PlayerNode: SKSpriteNode {
         Bullet.size = .init(width: 20, height: 15)
         Bullet.position = CGPoint(x: self.position.x + (30 * (isFacingRight ? 1 : -1)), y: self.position.y)
         
-        let toX = ((GameViewController.shared?.view.frame.width ?? 15) * (isFacingRight ? 1 : -1)) + self.position.x
-        let action = SKAction.moveTo(x: toX, duration: 3)
-        let actionDone = SKAction.removeFromParent()
+        let toX = 20 * (isFacingRight ? 1 : -1)
+        //let action = SKAction.moveTo(x: toX, duration: 3)
+        let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: 1)
+
+        // SKAction.applyForce(.init(dx: 5 * (isFacingRight ? 1 : -1), dy: 0), duration: 10)
+        let actionDone = SKAction.run {
+            Bullet.removeFromParent()
+        }
         Bullet.run(SKAction.sequence([action, actionDone]))
         
         Bullet.physicsBody = SKPhysicsBody(rectangleOf: Bullet.size)
+        Bullet.physicsBody?.allowsRotation = false
         Bullet.physicsBody?.categoryBitMask = PhysicCategory.Mask.bullet.bitmask
         Bullet.physicsBody?.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
         Bullet.physicsBody?.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
