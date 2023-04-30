@@ -10,6 +10,8 @@ import GameplayKit
 
 class JewelNode:SKSpriteNode {
     var touched:Bool = false
+    
+    
 }
 
 class JewelSpeed:JewelNode {

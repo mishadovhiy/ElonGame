@@ -11,6 +11,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    @IBOutlet weak var fireButton: UIButton!
     static var shared:GameViewController?
     var currentScene:Int = 0
     var scene:GameScene?
@@ -50,6 +51,15 @@ class GameViewController: UIViewController {
         return true
     }
     
+    func gameOverPresented() {
+        print("gameOverPresented")
+    }
+    
+    func gameOverRemoved() {
+        print("gameOverRemoved")
+
+    }
+    
     @IBAction func reloadPressed(_ sender: Any) {
         if let scene = scene {
             AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
@@ -58,4 +68,10 @@ class GameViewController: UIViewController {
         }
         
     }
+    
+    
+    @IBAction func firePressed(_ sender: Any) {
+        scene?.player?.spawnBullet()
+    }
+    
 }

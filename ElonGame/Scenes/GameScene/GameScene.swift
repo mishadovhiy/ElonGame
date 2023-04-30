@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SuperScene {
     
     var player : PlayerNode?
     var joystick : SKNode?
@@ -29,7 +29,6 @@ class GameScene: SKScene {
     var isHit = false
     
     var joystickAction = false
-    var playerIsFacingRight = true
     var knobRadius : CGFloat = 50.0
     var previousTimeInterval : TimeInterval = 0
     var playerState:GKStateMachine!
@@ -103,6 +102,10 @@ class GameScene: SKScene {
         self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
         self.backgroundPlayer?.playSound()
         self.backgroundPlayer?.numberOfLoops = -1
+        
+        
+        let t:PhysicCategory.Mask = .bullet
+        print("bullet: ", t.rawValue, " maks ", t.bitmask)
     }
 
     
@@ -117,7 +120,8 @@ class GameScene: SKScene {
     
     
     func showDieScene() {
-        let scene = GameScene(fileNamed: "GameOver")
+        GameViewController.shared?.scene = nil
+        let scene = SKScene(fileNamed: "GameOver")
         self.removeFromParent()
         self.view?.presentScene(scene)
         
@@ -136,6 +140,7 @@ class GameScene: SKScene {
                 self.run(Sound.levelUp.action)
                 next.scaleMode = .aspectFill
                 self.view?.presentScene(next)
+                GameViewController.shared?.scene = next
                 self.removeFromParent()
                 
             } else {
@@ -155,3 +160,15 @@ class GameScene: SKScene {
 }
 
 
+
+class SuperScene:SKScene {
+    override func sceneDidLoad() {
+        super.sceneDidLoad()
+        if name?.contains("GameOver") ?? false {
+            GameViewController.shared?.gameOverPresented()
+        } else {
+            GameViewController.shared?.gameOverRemoved()
+
+        }
+    }
+}

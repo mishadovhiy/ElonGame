@@ -26,14 +26,35 @@
                                     <action selector="reloadPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LfG-Ve-6CR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ble-2I-U3t">
+                                <rect key="frame" x="253" y="79" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="1r9-68-jYr"/>
+                                    <constraint firstAttribute="height" constant="90" id="iOw-fY-hOF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="fireOutline" backgroundImage="oval">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                </state>
+                                <connections>
+                                    <action selector="firePressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="488-R7-f75"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wyW-Lz-3xl" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="1PQ-qW-31c"/>
-                            <constraint firstItem="wyW-Lz-3xl" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="qGw-0n-Blr"/>
+                            <constraint firstItem="wyW-Lz-3xl" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="Hwa-vq-ahr"/>
+                            <constraint firstItem="Ble-2I-U3t" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="O8p-SA-u7F"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="Ble-2I-U3t" secondAttribute="trailing" constant="50" id="eY8-dy-gsu"/>
+                            <constraint firstItem="wyW-Lz-3xl" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="od8-pu-8L0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fireButton" destination="Ble-2I-U3t" id="Xvg-nV-dHp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,6 +62,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fireOutline" width="22" height="17"/>
+        <image name="oval" width="140" height="140"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

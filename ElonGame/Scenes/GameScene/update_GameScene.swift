@@ -40,13 +40,13 @@ extension GameScene {
         let faceAction : SKAction!
         let movingRight = xPosition > 0
         let movingLeft = xPosition < 0
-        if movingLeft && playerIsFacingRight {
-            playerIsFacingRight = false
+        if movingLeft && player?.isFacingRight ?? false {
+            player?.isFacingRight = false
             let faceMovement = SKAction.scaleX(to: -1, duration: 0.0)
             faceAction = SKAction.sequence([move, faceMovement])
         }
-        else if movingRight && !playerIsFacingRight {
-            playerIsFacingRight = true
+        else if movingRight && !(player?.isFacingRight ?? false) {
+            player?.isFacingRight = true
             let faceMovement = SKAction.scaleX(to: 1, duration: 0.0)
             faceAction = SKAction.sequence([move, faceMovement])
         } else {

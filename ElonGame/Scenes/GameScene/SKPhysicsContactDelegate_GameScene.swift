@@ -11,7 +11,7 @@ import GameplayKit
 extension GameScene:SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let collisions = Collisions(masks: (first: contact.bodyA.categoryBitMask, second: contact.bodyB.categoryBitMask))
+        let collisions = PhysicCategory(masks: (first: contact.bodyA.categoryBitMask, second: contact.bodyB.categoryBitMask))
 
         
         
@@ -51,21 +51,21 @@ extension GameScene:SKPhysicsContactDelegate {
         if collisions.matches(.player, .killing) {
             self.hitted()
         }
-    }
-    
-    
-    
-    struct Collisions {
-        enum Mask:Int {
-            case killing, player, reward, ground
-            var bitmask:UInt32 { 1 << self.rawValue }
-        }
-        let masks:(first:UInt32, second:UInt32)
-        func matches(_ first:Mask, _ second:Mask) -> Bool {
-            return (first.bitmask == self.masks.first && second.bitmask == self.masks.second) || (first.bitmask == self.masks.second && second.bitmask == self.masks.first)
-        }
         
+        if collisions.matches(.bullet, .killing) {
+            print("bvghuijk")
+        }
+        if collisions.matches(.bullet, .ground) {
+            print("hgfsd")
+        }
+        if collisions.matches(.bullet, .player) {
+            print("grefwd")
+        }
     }
+    
+    
+    
+    
     
 }
 
@@ -86,10 +86,10 @@ extension  GameScene {
         node.zPosition = 5
         
         let phBody = SKPhysicsBody(circleOfRadius: 30)
-        phBody.categoryBitMask = Collisions.Mask.killing.bitmask
-        phBody.collisionBitMask = Collisions.Mask.player.bitmask | Collisions.Mask.ground.bitmask
-        phBody.contactTestBitMask = Collisions.Mask.player.bitmask | Collisions.Mask.ground.bitmask
-        phBody.fieldBitMask = Collisions.Mask.player.bitmask | Collisions.Mask.ground.bitmask
+        phBody.categoryBitMask = PhysicCategory.Mask.killing.bitmask
+        phBody.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        phBody.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        phBody.fieldBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
         phBody.affectedByGravity = true
         phBody.allowsRotation = false
         phBody.restitution = 0.2

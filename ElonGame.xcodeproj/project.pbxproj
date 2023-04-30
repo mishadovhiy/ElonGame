@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11F00929E8D1370088E3D4 /* update_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11F00829E8D1370088E3D4 /* update_GameScene.swift */; };
 		8D11F00B29E8D1F00088E3D4 /* SKPhysicsContactDelegate_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11F00A29E8D1F00088E3D4 /* SKPhysicsContactDelegate_GameScene.swift */; };
+		8D313C6529FEFE9D00BF72E4 /* PhysicCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D313C6429FEFE9D00BF72E4 /* PhysicCategory.swift */; };
 		8D378FCD29F66718000179D2 /* rewardSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FC629F66718000179D2 /* rewardSound.wav */; };
 		8D378FCE29F66718000179D2 /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FC729F66718000179D2 /* music.wav */; };
 		8D378FCF29F66718000179D2 /* meteorFallingSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FC829F66718000179D2 /* meteorFallingSound.m4a */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		8D11F00829E8D1370088E3D4 /* update_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = update_GameScene.swift; sourceTree = "<group>"; };
 		8D11F00A29E8D1F00088E3D4 /* SKPhysicsContactDelegate_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhysicsContactDelegate_GameScene.swift; sourceTree = "<group>"; };
+		8D313C6429FEFE9D00BF72E4 /* PhysicCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicCategory.swift; sourceTree = "<group>"; };
 		8D378FC629F66718000179D2 /* rewardSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rewardSound.wav; sourceTree = "<group>"; };
 		8D378FC729F66718000179D2 /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
 		8D378FC829F66718000179D2 /* meteorFallingSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = meteorFallingSound.m4a; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				8DD9BA7F29E77C6E001A667D /* AlertViewLibrary */,
 				8D86DAC529DA237E00961C2F /* PlayerStateMachine.swift */,
+				8D313C6429FEFE9D00BF72E4 /* PhysicCategory.swift */,
 				8D378FE629F7168B000179D2 /* Sounds.swift */,
 				8D378FEB29F73A21000179D2 /* AudioPlayer.swift */,
 			);
@@ -348,6 +351,7 @@
 				8D378FDC29F66BFD000179D2 /* Extensions_GameScene.swift in Sources */,
 				8D378FE929F72B3C000179D2 /* JewelNode.swift in Sources */,
 				8D378FEC29F73A21000179D2 /* AudioPlayer.swift in Sources */,
+				8D313C6529FEFE9D00BF72E4 /* PhysicCategory.swift in Sources */,
 				8D378FE729F7168B000179D2 /* Sounds.swift in Sources */,
 				8D37C4F029F9D95C006A5633 /* PlayerNode.swift in Sources */,
 				8D86DAC129D9FE8900961C2F /* touchesBegan_GameScene.swift in Sources */,

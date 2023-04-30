@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class GameOverScene:SKScene {
+class GameOverScene:SuperScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {_ in
