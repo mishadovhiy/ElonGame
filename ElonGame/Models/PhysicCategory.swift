@@ -8,9 +8,15 @@
 import Foundation
 
 struct PhysicCategory {
-    enum Mask:Int {
-        case killing, player, reward, ground, bullet
-        var bitmask:UInt32 { 1 << self.rawValue }
+    enum Mask:UInt32 {
+        case killing, player, reward, ground, bullet, all
+        var bitmask:UInt32 { 1 << self.rawVal }
+        var rawVal: UInt32 {
+            switch self {
+            case .all: return .max
+            default: return self.rawValue
+            }
+        }
     }
     let masks:(first:UInt32, second:UInt32)
     func matches(_ first:Mask, _ second:Mask) -> Bool {

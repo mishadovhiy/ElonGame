@@ -40,7 +40,6 @@ class GameScene: SuperScene {
     var presenting:Bool = false
     var jumpTouched = false
 
-    var currentFloour:Int = 0
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         presenting = true
@@ -58,7 +57,11 @@ class GameScene: SuperScene {
         moon = childNode(withName: "moon")
         stars = childNode(withName: "stars")
         self.flour = childNode(withName: "flour")
-        
+        enumerateChildNodes(withName: "enemy", using: {node,point in
+            if let enemy = node as? EnemyNode {
+                enemy.sceneMoved()
+            }
+        })
         enumerateChildNodes(withName: "jewel", using: {_,_ in
             self.rewardCount += 1
         })
@@ -159,6 +162,54 @@ class GameScene: SuperScene {
     
 }
 
+
+extension  GameScene {
+    func spawnMeteor() {
+        let node = SKSpriteNode(imageNamed: "meteor")
+        node.name = "meteor"
+        let camPos = camera?.position
+        let x = Int(camPos?.x ?? 0)
+        let wi = Int(self.size.width)
+        let isMinus = x <= 0
+        let xr = isMinus ? x * -1 : x
+        let randomXPosition = Int.random(in: xr..<(wi + xr))
+        //Int(arc4random_uniform(UInt32(self.size.width)))
+        node.position = .init(x: randomXPosition * (isMinus ? -1 : 1), y: 270)
+        node.anchorPoint = .init(x: 0.5, y: 1)
+        node.zPosition = 5
+        
+        let phBody = SKPhysicsBody(circleOfRadius: 30)
+        phBody.categoryBitMask = PhysicCategory.Mask.killing.bitmask
+        phBody.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        phBody.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        phBody.fieldBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        phBody.affectedByGravity = true
+        phBody.allowsRotation = false
+        phBody.restitution = 0.2
+        phBody.friction = 1.0
+    
+        node.physicsBody = phBody
+        
+        addChild(node)
+    }
+    
+    func createMolten(at position:CGPoint) {
+        let node = SKSpriteNode(imageNamed: "molten")
+        node.position = .init(x: position.x, y: position.y - 60)
+        node.zPosition = 4
+        
+        addChild(node)
+        
+        let action = SKAction.sequence([
+            .fadeIn(withDuration: 0.1),
+            .wait(forDuration: 3.0),
+            .fadeOut(withDuration: 0.2),
+            .removeFromParent()
+        ])
+
+        node.run(action)
+    }
+}
 
 
 class SuperScene:SKScene {

@@ -11,7 +11,7 @@ class PlayerNode: SKSpriteNode {
     private let regularSpeed: CGFloat = 5
     var isFacingRight = true
     var walkingSpeed:CGFloat {
-        isSuperSpeed ? 15 : regularSpeed
+        isSuperSpeed ? 10 : regularSpeed
     }
     var isSuperSpeed:Bool = false
     
@@ -62,5 +62,12 @@ class PlayerNode: SKSpriteNode {
         Bullet.physicsBody?.affectedByGravity = false
         Bullet.physicsBody?.isDynamic = true
         GameViewController.shared?.scene?.addChild(Bullet)
+    }
+}
+
+
+class EnemyNode:PlayerNode {
+    func sceneMoved() {
+        
     }
 }
