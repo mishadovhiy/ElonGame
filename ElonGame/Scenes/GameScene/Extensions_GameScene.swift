@@ -78,6 +78,8 @@ extension GameScene {
         reqardTouched()
         run(Sound.reward.action)
     }
+    
+
 }
 
 

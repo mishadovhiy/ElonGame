@@ -81,7 +81,7 @@ class GameScene: SuperScene {
         
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { timer in
             if self.presenting {
-                self.spawnMeteor()
+             //   self.spawnMeteor()
             } else {
                 timer.invalidate()
             }

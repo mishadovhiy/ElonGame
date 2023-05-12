@@ -58,6 +58,15 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         if collisions.matches(.bullet, .player) {
             print("grefwd")
+            //here
+            if let enemy = contact.matched(name: "enemy") as? PlayerNode,
+               let bullet = contact.matched(name: "bullet") as? BulletNode,
+               !bullet.touchedEnemy
+            {
+                bullet.touchedEnemy = true
+                print("rvfec")
+                enemy.bulletTouched()
+            }
         }
         if collisions.matches(.bullet, .all) {
             print("bullet in something")

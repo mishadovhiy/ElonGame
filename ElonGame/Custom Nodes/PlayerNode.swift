@@ -8,6 +8,7 @@
 import SpriteKit
 
 class PlayerNode: SKSpriteNode {
+    var lifes = 5
     private let regularSpeed: CGFloat = 5
     var isFacingRight = true
     var walkingSpeed:CGFloat {
@@ -34,11 +35,12 @@ class PlayerNode: SKSpriteNode {
     
     
     func spawnBullet(){
-        let Bullet = SKSpriteNode(imageNamed: "fireBlue")
+        let Bullet = BulletNode(imageNamed: "fireBlue")
         if !isFacingRight {
             Bullet.zRotation = CGFloat(M_PI_2)*2
         }
         
+        Bullet.name = "bullet"
         Bullet.color = .red
         Bullet.size = .init(width: 20, height: 15)
         Bullet.position = CGPoint(x: self.position.x + (30 * (isFacingRight ? 1 : -1)), y: self.position.y)
@@ -63,6 +65,19 @@ class PlayerNode: SKSpriteNode {
         Bullet.physicsBody?.isDynamic = true
         GameViewController.shared?.scene?.addChild(Bullet)
     }
+    
+    
+    func bulletTouched() {
+        lifes -= 1
+        if lifes <= 0 {
+            removeEnemy()
+        }
+    }
+    
+    func removeEnemy() {
+        self.removeFromParent()
+    }
+    
 }
 
 
@@ -70,4 +85,10 @@ class EnemyNode:PlayerNode {
     func sceneMoved() {
         
     }
+}
+
+
+
+class BulletNode:SKSpriteNode {
+    var touchedEnemy = false
 }
