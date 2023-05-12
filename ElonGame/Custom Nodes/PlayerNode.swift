@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import GameplayKit
 
 class PlayerNode: SKSpriteNode {
     var lifes = 5
@@ -15,7 +16,6 @@ class PlayerNode: SKSpriteNode {
         isSuperSpeed ? 10 : regularSpeed
     }
     var isSuperSpeed:Bool = false
-    
     private var timer:Timer?
     
     func startSuperSpeed() -> Bool {
@@ -70,14 +70,40 @@ class PlayerNode: SKSpriteNode {
     func bulletTouched() {
         lifes -= 1
         if lifes <= 0 {
-            removeEnemy()
+            die()
         }
     }
     
-    func removeEnemy() {
-        self.removeFromParent()
+    func die() {
+        let dieAction = SKAction.move(to: CGPoint(x: -300, y: 0), duration: 0.1)
+        
+        self.run(dieAction)
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
+            self.removeFromParent()
+        })
+        
     }
     
+    var isMeteorHitted = false
+    func meteorHit() {
+        isMeteorHitted = true
+        lifes -= 1
+        if lifes != 0 {
+            invincible()
+        } else  {
+            die()
+        }
+        
+    }
+    
+    
+    func invincible() {
+        self.physicsBody?.categoryBitMask = 0
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+            self.isMeteorHitted = false
+            self.physicsBody?.categoryBitMask = 2
+        }
+    }
 }
 
 

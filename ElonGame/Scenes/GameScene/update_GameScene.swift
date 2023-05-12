@@ -19,9 +19,8 @@ extension GameScene {
         moveBackground()
         movePlayer(deltaTime)
         
-        if player?.position.y ?? 0 <= -5000 && !falledOut {
-            self.falledOut = true
-            self.hitted()
+        if player?.position.y ?? 0 <= -5000 {
+            self.showDieScene()
         }
     }
     

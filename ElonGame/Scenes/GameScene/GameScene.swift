@@ -26,7 +26,6 @@ class GameScene: SuperScene {
     let scoreLabel:SKLabelNode = .init()
     
     var score:Int = 0
-    var isHit = false
     
     var joystickAction = false
     var knobRadius : CGFloat = 50.0
@@ -100,7 +99,7 @@ class GameScene: SuperScene {
         heartContainer.position = CGPoint(x: -300, y: 140)
         heartContainer.zPosition = 5
         cameraNode?.addChild(heartContainer)
-        fillHearts(count: 5)
+        fillHearts(count: player?.lifes ?? 1)
         
         self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
         self.backgroundPlayer?.playSound()
@@ -153,9 +152,8 @@ class GameScene: SuperScene {
             }
         }
     }
-    var falledOut = false
     func hitted() {
-        isHit = true
+        player?.meteorHit()
         loseHeart()
         playerState.enter(StunnedState.self)
     }

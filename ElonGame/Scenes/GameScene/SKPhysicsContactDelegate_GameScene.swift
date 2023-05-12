@@ -47,7 +47,12 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         
         if collisions.matches(.player, .killing) {
-            self.hitted()
+            if let _ = contact.matched(name: "player") {
+                self.hitted()
+            } else if let enemy = contact.matched(name: "enemy") as? PlayerNode {
+                enemy.meteorHit()
+            }
+            
         }
         
         if collisions.matches(.bullet, .killing) {
@@ -57,14 +62,11 @@ extension GameScene:SKPhysicsContactDelegate {
             print("hgfsd")
         }
         if collisions.matches(.bullet, .player) {
-            print("grefwd")
-            //here
             if let enemy = contact.matched(name: "enemy") as? PlayerNode,
                let bullet = contact.matched(name: "bullet") as? BulletNode,
                !bullet.touchedEnemy
             {
                 bullet.touchedEnemy = true
-                print("rvfec")
                 enemy.bulletTouched()
             }
         }
