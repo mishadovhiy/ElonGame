@@ -18,6 +18,7 @@ extension GameScene:SKPhysicsContactDelegate {
         if collisions.matches(.player, .ground) {
             if let _ = contact.matched(name: "player") {
                 playerState.enter(LandingState.self)
+                print(contact.collisionImpulse, " fdyjgukhj")
             }
         }
         
@@ -80,10 +81,22 @@ extension GameScene:SKPhysicsContactDelegate {
         }
         
         if collisions.matches(.player, .player) {
-            print("hrtegrfwedas")
+            print("playeraenemyat:", contact.contactPoint)
+            if let player = contact.matched(name: "player") as? PlayerNode,
+               let enemy = contact.matched(name: "enemy") as? PlayerNode
+            {
+                print(enemy.position, " enemyPos efdwrfevrgfe")
+                print(player.position, " playerPos efdwrfevrgfe")
+                if enemy.position.y.range(30, in: player.position.y) {
+                    self.hitted()
+                } else {
+                    enemy.meteorHit()
+                }
+                
+                
+            }
         }
-        
-        
+
     }
 
 }

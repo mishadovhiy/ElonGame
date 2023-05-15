@@ -108,6 +108,9 @@ class GameScene: SuperScene {
         
         let t:PhysicCategory.Mask = .bullet
         print("bullet: ", t.rawValue, " maks ", t.bitmask)
+        
+        
+        print(player?.frame.height, " ytrefd")
     }
 
     

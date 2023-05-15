@@ -31,3 +31,14 @@ extension SKNode {
         return 0
     }
 }
+
+extension CGFloat {
+    var positive:CGFloat {
+        return self < 0 ? (self * -1) : self
+    }
+    
+    func range(_ multiplier:CGFloat, in value:CGFloat) ->Bool {
+        let range = ((self - multiplier)...(self + multiplier))
+        return range.contains(value)
+    }
+}
