@@ -19,9 +19,11 @@ protocol PlayerStateProtocol {
 class PlayerState:GKState {
     unowned var playerNode:SKNode
     var stateNum:Int = 0
+    var num:Int = 0
     var delegate:PlayerStateProtocol?
-    init(playerNode: SKNode) {
+    init(playerNode: SKNode, stateNum:Int) {
         self.playerNode = playerNode
+        self.num = stateNum
         super.init()
     }
 }
@@ -58,7 +60,7 @@ class JumpingState:PlayerState {
 
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {_ in
             self.hasFinnished = true
-            self.stateNum = 3
+            self.stateNum = 1
             self.delegate?.endJumping()
         })
     }
@@ -112,6 +114,7 @@ class WalkingState:PlayerState {
         self.stateNum = 0
         self.playerNode.removeAction(forKey: PlayerSTateKeys.characterAnimationKey)
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
+        
     }
 }
 

@@ -71,7 +71,7 @@ extension GameScene:SKPhysicsContactDelegate {
                !bullet.touchedEnemy
             {
                 bullet.touchedEnemy = true
-                enemy.bulletTouched()
+                enemy.bulletTouched(contact: contact)
                 bullet.remove()
             }
         }

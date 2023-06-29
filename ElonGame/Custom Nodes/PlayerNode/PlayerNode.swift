@@ -15,13 +15,15 @@ class PlayerNode: SKSpriteNode {
     private let regularSpeed: CGFloat = 5
     var isFacingRight = true
     var walkingSpeed:CGFloat {
-        isSuperSpeed ? 10 : regularSpeed
+        let isEnemy = self as? EnemyNode != nil
+
+        return isEnemy ? 1.2 : (isSuperSpeed ? 10 : regularSpeed)
     }
     var isSuperSpeed:Bool = false
     private var timer:Timer?
     var canSpawnBullets = true
     var state:GKStateMachine!
-
+    var shootingFromRight:Bool?
     var delegate:PlayerNodeProtocol?
     
     func startSuperSpeed() -> Bool {
@@ -75,11 +77,10 @@ class PlayerNode: SKSpriteNode {
     }
     
     
-    func bulletTouched() {
-        lifes -= 1
-        if lifes <= 0 {
-            die()
-        }
+    func bulletTouched(contact:SKPhysicsContact? = nil) {
+        hitted()
+        let isRight = (contact?.contactPoint ?? .zero).x - self.position.x > 0
+        shootingFromRight = isRight
     }
     
     func die() {
@@ -87,25 +88,29 @@ class PlayerNode: SKSpriteNode {
         
         self.run(dieAction)
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
+            self.died = true
             self.delegate?.died()
             self.removeFromParent()
         })
         
     }
-    
+    var died = false
     var isMeteorHitted = false
     func meteorHit() {
-        state.enter(StunnedState.self)
         isMeteorHitted = true
+
+        hitted()
+        
+    }
+    func hitted() {
+        state.enter(StunnedState.self)
         lifes -= 1
         if lifes != 0 {
             invincible()
         } else  {
             die()
         }
-        
     }
-    
     
     func invincible() {
         self.physicsBody?.categoryBitMask = 0
@@ -119,27 +124,28 @@ class PlayerNode: SKSpriteNode {
     func jump(isSecond:Bool = false) {
         self.run(.applyForce(CGVector(dx: 0, dy: !isSecond ? 350 : 400), duration: 0.1))
         self.run(Sound.jump.action)
+     //   state.enter(JumpingState.self)
     }
     
-    func move(xPosition:CGFloat, deltaTime: TimeInterval) {
+    func move(xPosition:CGFloat, deltaTime: TimeInterval, duration:TimeInterval = 0) {
         if floor(xPosition.positive) != 0 {
             state.enter(WalkingState.self)
         } else {
             state.enter(IdleState.self)
         }
         
-        let move = SKAction.move(by: .init(dx: deltaTime * xPosition * walkingSpeed, dy: 0), duration: 0)
+        let move = SKAction.move(by: .init(dx: deltaTime * xPosition * walkingSpeed, dy: 0), duration: duration)
+
         let faceAction : SKAction!
         let movingRight = xPosition > 0
         let movingLeft = xPosition < 0
         if movingLeft && isFacingRight {
             isFacingRight = false
-            let faceMovement = SKAction.scaleX(to: -1, duration: 0.0)
+            let faceMovement = SKAction.scaleX(to: -1, duration: 0)
             faceAction = SKAction.sequence([move, faceMovement])
-        }
-        else if movingRight && !isFacingRight {
+        } else if movingRight && !isFacingRight {
             isFacingRight = true
-            let faceMovement = SKAction.scaleX(to: 1, duration: 0.0)
+            let faceMovement = SKAction.scaleX(to: 1, duration: 0)
             faceAction = SKAction.sequence([move, faceMovement])
         } else {
             faceAction = move
@@ -150,30 +156,14 @@ class PlayerNode: SKSpriteNode {
 
     func sceneMoved() {
         state = GKStateMachine(states: [
-            JumpingState(playerNode: self),
-            WalkingState(playerNode: self),
-            IdleState(playerNode: self),
-            LandingState(playerNode: self),
-            StunnedState(playerNode: self)
+            JumpingState(playerNode: self, stateNum: 1),
+            WalkingState(playerNode: self, stateNum: 3),
+            IdleState(playerNode: self, stateNum: 4),
+            LandingState(playerNode: self, stateNum: 5),
+            StunnedState(playerNode: self, stateNum: 6)
         ])
         state.enter(IdleState.self)
     }
 
 }
 
-
-class EnemyNode:PlayerNode {
-    
-}
-
-
-
-class BulletNode:SKSpriteNode {
-    var player:PlayerNode? 
-    var touchedEnemy = false
-    
-    func remove() {
-        player?.canSpawnBullets = true
-        self.removeFromParent()
-    }
-}

@@ -12,6 +12,7 @@ extension GameScene {
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
+        print(currentTime, " yhtgrfedws")
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
 
