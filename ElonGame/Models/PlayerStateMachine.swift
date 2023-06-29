@@ -153,7 +153,7 @@ enum Difficulty:Int {
     
 
     init() {
-        self = .init(rawValue: .random(in: 0..<8)) ?? .medium
+        self = .init(rawValue: [0, 2, 6].randomElement() ?? 0) ?? .medium
 
     }
     

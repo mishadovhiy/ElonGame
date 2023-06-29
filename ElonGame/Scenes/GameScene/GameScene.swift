@@ -150,8 +150,8 @@ class GameScene: SuperScene {
             }
         }
     }
-    func hitted() {
-        player?.meteorHit()
+    func hitted(by:SKSpriteNode? = nil) {
+        player?.meteorHit(by: by)
         loseHeart()
     }
     

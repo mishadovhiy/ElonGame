@@ -102,16 +102,28 @@ class PlayerNode: SKSpriteNode {
     }
     var died = false
     var isMeteorHitted = false
-    func meteorHit() {
+    
+    func meteorHit(by:SKSpriteNode? = nil) {
         //isMeteorHitted = true
-
-        hitted()
+        hitted(node: by)
         
     }
-    func hitted() {
+    func hitPower(node:SKSpriteNode?) -> Int {
+        if let node = node {
+            if let bullet = node as? BulletNode {
+                return (bullet.player?.difficulty.n ?? 0) + 1
+            } else {
+                return 1
+            }
+        } else {
+            return 1
+        }
+    }
+    
+    func hitted(node:SKSpriteNode? = nil) {
         isMeteorHitted = true
         state.enter(StunnedState.self)
-        lifes -= 1
+        lifes -= hitPower(node: node)
         if lifes != 0 {
             invincible()
         } else  {
@@ -174,6 +186,8 @@ class PlayerNode: SKSpriteNode {
         if let _ = self as? EnemyNode {
           //  difficulty = .init()
             self.lifes = 3 * (difficulty.n + 1)
+        } else {
+            difficulty = .light
         }
     }
 

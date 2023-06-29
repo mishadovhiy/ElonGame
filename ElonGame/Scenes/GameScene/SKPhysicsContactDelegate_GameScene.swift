@@ -85,7 +85,7 @@ extension GameScene:SKPhysicsContactDelegate {
                     enemy.bulletTouched(contact: contact)
                     
                 } else if let _ = contact.matched(name: "player") as? PlayerNode {
-                    hitted()
+                    hitted(by: bullet)
                 }
                 
             }
