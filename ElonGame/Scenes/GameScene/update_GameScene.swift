@@ -27,31 +27,7 @@ extension GameScene {
     
     private func movePlayer(_ deltaTime:TimeInterval) {
         guard let joystickKnob = joystickKnob else { return }
-        let xPosition = Double(joystickKnob.position.x)
-        let positivePos = xPosition < 0 ? -xPosition : xPosition
-        if floor(positivePos) != 0 {
-            playerState.enter(WalkingState.self)
-        } else {
-            playerState.enter(IdleState.self)
-        }
-        let displacement = CGVector(dx: deltaTime * xPosition * (player?.walkingSpeed ?? 0), dy: 0)
-        let move = SKAction.move(by: displacement, duration: 0)
-        let faceAction : SKAction!
-        let movingRight = xPosition > 0
-        let movingLeft = xPosition < 0
-        if movingLeft && player?.isFacingRight ?? false {
-            player?.isFacingRight = false
-            let faceMovement = SKAction.scaleX(to: -1, duration: 0.0)
-            faceAction = SKAction.sequence([move, faceMovement])
-        }
-        else if movingRight && !(player?.isFacingRight ?? false) {
-            player?.isFacingRight = true
-            let faceMovement = SKAction.scaleX(to: 1, duration: 0.0)
-            faceAction = SKAction.sequence([move, faceMovement])
-        } else {
-            faceAction = move
-        }
-        player?.run(faceAction)
+        player?.move(xPosition: joystickKnob.position.x, deltaTime: deltaTime)
     }
     
     private func moveCamera() {

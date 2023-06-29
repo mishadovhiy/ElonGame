@@ -30,7 +30,6 @@ class GameScene: SuperScene {
     var joystickAction = false
     var knobRadius : CGFloat = 50.0
     var previousTimeInterval : TimeInterval = 0
-    var playerState:GKStateMachine!
     var touching = false
     
     var rewardCount:Int = 0
@@ -45,6 +44,7 @@ class GameScene: SuperScene {
         physicsWorld.contactDelegate = self
         
         player = childNode(withName: "player") as? PlayerNode
+        player?.sceneMoved()
         print(player!.walkingSpeed)
         joystick = childNode(withName: "joystic")
         joystickKnob = joystick?.childNode(withName: "controllIndicator")
@@ -58,7 +58,9 @@ class GameScene: SuperScene {
         self.flour = childNode(withName: "flour")
         enumerateChildNodes(withName: "enemy", using: {node,point in
             if let enemy = node as? EnemyNode {
+                enemy.delegate = self
                 enemy.sceneMoved()
+                self.rewardCount += 1
             }
         })
         enumerateChildNodes(withName: "jewel", using: {_,_ in
@@ -66,15 +68,8 @@ class GameScene: SuperScene {
         })
         print("rewardCount: ", rewardCount)
 
-        playerState = GKStateMachine(states: [
-            JumpingState(playerNode: self.player!),
-            WalkingState(playerNode: self.player!),
-            IdleState(playerNode: self.player!),
-            LandingState(playerNode: self.player!),
-            StunnedState(playerNode: self.player!)
-        ])
-        playerState.enter(IdleState.self)
-        if let state = playerState.currentState as? PlayerState {
+        
+        if let state = player?.state.currentState as? PlayerState {
             state.delegate = self
         }
         
@@ -158,7 +153,6 @@ class GameScene: SuperScene {
     func hitted() {
         player?.meteorHit()
         loseHeart()
-        playerState.enter(StunnedState.self)
     }
     
 }

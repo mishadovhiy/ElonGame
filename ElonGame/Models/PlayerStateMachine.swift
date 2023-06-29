@@ -33,8 +33,7 @@ class JumpingState:PlayerState {
         if stateClass is JumpingState.Type && !secondJump {
             print("JumpingState")
             secondJump = true
-            playerNode.run(.applyForce(CGVector(dx: 0, dy: 350), duration: 0.1))
-            playerNode.run(Sound.jump.action)
+            (playerNode as? PlayerNode)?.jump()
             Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: {_ in
                 self.secondJump = false
             })
@@ -55,8 +54,8 @@ class JumpingState:PlayerState {
         self.playerNode.run(action, withKey: PlayerSTateKeys.characterAnimationKey)
         self.stateNum = 2
         hasFinnished = false
-        playerNode.run(.applyForce(CGVector(dx: 0, dy: 400), duration: 0.1))
-        playerNode.run(Sound.jump.action)
+        (playerNode as? PlayerNode)?.jump(isSecond: true)
+
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {_ in
             self.hasFinnished = true
             self.stateNum = 3

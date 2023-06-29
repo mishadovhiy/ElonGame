@@ -17,7 +17,7 @@ extension GameScene:SKPhysicsContactDelegate {
         
         if collisions.matches(.player, .ground) {
             if let _ = contact.matched(name: "player") {
-                playerState.enter(LandingState.self)
+                player?.state.enter(LandingState.self)
                 print(contact.collisionImpulse, " fdyjgukhj")
                 if contact.collisionImpulse >= 190 {
                     self.hitted()
@@ -72,6 +72,7 @@ extension GameScene:SKPhysicsContactDelegate {
             {
                 bullet.touchedEnemy = true
                 enemy.bulletTouched()
+                bullet.remove()
             }
         }
         if collisions.matches(.bullet, .all) {

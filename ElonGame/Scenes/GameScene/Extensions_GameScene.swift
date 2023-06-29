@@ -68,7 +68,13 @@ extension GameScene {
 
 }
 
-
+extension GameScene:PlayerNodeProtocol {
+    func died() {
+        self.score += 1
+    }
+    
+    
+}
 
 extension GameScene:PlayerStateProtocol {
     func endJumping() {

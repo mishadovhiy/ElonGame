@@ -7,7 +7,9 @@
 
 import SpriteKit
 import GameplayKit
-
+protocol PlayerNodeProtocol {
+    func died()
+}
 class PlayerNode: SKSpriteNode {
     var lifes = 5
     private let regularSpeed: CGFloat = 5
@@ -17,6 +19,10 @@ class PlayerNode: SKSpriteNode {
     }
     var isSuperSpeed:Bool = false
     private var timer:Timer?
+    var canSpawnBullets = true
+    var state:GKStateMachine!
+
+    var delegate:PlayerNodeProtocol?
     
     func startSuperSpeed() -> Bool {
         if timer == nil {
@@ -35,11 +41,13 @@ class PlayerNode: SKSpriteNode {
     
     
     func spawnBullet(){
+        if !canSpawnBullets { return }
+        canSpawnBullets = false
         let Bullet = BulletNode(imageNamed: "fireBlue")
         if !isFacingRight {
             Bullet.zRotation = CGFloat(M_PI_2)*2
         }
-        
+        Bullet.player = self
         Bullet.name = "bullet"
         Bullet.color = .red
         Bullet.size = .init(width: 20, height: 15)
@@ -48,10 +56,10 @@ class PlayerNode: SKSpriteNode {
         let toX = 20 * (isFacingRight ? 1 : -1)
         //let action = SKAction.moveTo(x: toX, duration: 3)
         let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: 1)
-
+        
         // SKAction.applyForce(.init(dx: 5 * (isFacingRight ? 1 : -1), dy: 0), duration: 10)
         let actionDone = SKAction.run {
-            Bullet.removeFromParent()
+            Bullet.remove()
         }
         Bullet.run(SKAction.sequence([action, actionDone]))
         
@@ -79,6 +87,7 @@ class PlayerNode: SKSpriteNode {
         
         self.run(dieAction)
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
+            self.delegate?.died()
             self.removeFromParent()
         })
         
@@ -86,6 +95,7 @@ class PlayerNode: SKSpriteNode {
     
     var isMeteorHitted = false
     func meteorHit() {
+        state.enter(StunnedState.self)
         isMeteorHitted = true
         lifes -= 1
         if lifes != 0 {
@@ -104,17 +114,66 @@ class PlayerNode: SKSpriteNode {
             self.physicsBody?.categoryBitMask = 2
         }
     }
+    
+    
+    func jump(isSecond:Bool = false) {
+        self.run(.applyForce(CGVector(dx: 0, dy: !isSecond ? 350 : 400), duration: 0.1))
+        self.run(Sound.jump.action)
+    }
+    
+    func move(xPosition:CGFloat, deltaTime: TimeInterval) {
+        if floor(xPosition.positive) != 0 {
+            state.enter(WalkingState.self)
+        } else {
+            state.enter(IdleState.self)
+        }
+        
+        let move = SKAction.move(by: .init(dx: deltaTime * xPosition * walkingSpeed, dy: 0), duration: 0)
+        let faceAction : SKAction!
+        let movingRight = xPosition > 0
+        let movingLeft = xPosition < 0
+        if movingLeft && isFacingRight {
+            isFacingRight = false
+            let faceMovement = SKAction.scaleX(to: -1, duration: 0.0)
+            faceAction = SKAction.sequence([move, faceMovement])
+        }
+        else if movingRight && !isFacingRight {
+            isFacingRight = true
+            let faceMovement = SKAction.scaleX(to: 1, duration: 0.0)
+            faceAction = SKAction.sequence([move, faceMovement])
+        } else {
+            faceAction = move
+        }
+        self.run(faceAction)
+    }
+
+
+    func sceneMoved() {
+        state = GKStateMachine(states: [
+            JumpingState(playerNode: self),
+            WalkingState(playerNode: self),
+            IdleState(playerNode: self),
+            LandingState(playerNode: self),
+            StunnedState(playerNode: self)
+        ])
+        state.enter(IdleState.self)
+    }
+
 }
 
 
 class EnemyNode:PlayerNode {
-    func sceneMoved() {
-        
-    }
+    
 }
 
 
 
 class BulletNode:SKSpriteNode {
+    var player:PlayerNode? 
     var touchedEnemy = false
+    
+    func remove() {
+        player?.canSpawnBullets = true
+        self.removeFromParent()
+    }
 }

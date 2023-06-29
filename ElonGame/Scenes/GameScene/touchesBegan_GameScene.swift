@@ -22,7 +22,7 @@ extension GameScene {
             let joysticLocation = touch.location(in: self)
             if !joystic.contains(joysticLocation) {
                 jumpTouched = true
-                playerState.enter(JumpingState.self)
+                player?.state.enter(JumpingState.self)
                 
 
             }

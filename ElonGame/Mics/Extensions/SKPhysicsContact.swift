@@ -42,3 +42,17 @@ extension CGFloat {
         return range.contains(value)
     }
 }
+
+
+extension Double {
+    var positive:Double {
+        return self < 0 ? (self * -1) : self
+
+    }
+}
+extension Int {
+    var positive:Int {
+        return self < 0 ? (self * -1) : self
+
+    }
+}
