@@ -17,7 +17,7 @@ extension GameScene {
         joystickAction = false
     }
     
-    func reqardTouched() {
+    func increesScore() {
         self.score += 1
         print("scoreeee: ", score)
         self.scoreLabel.text = "\(score)"
@@ -61,7 +61,7 @@ extension GameScene {
         node.touched = true
         node.physicsBody?.categoryBitMask = 0
         node.removeFromParent()
-        reqardTouched()
+        increesScore()
         run(Sound.reward.action)
     }
     
@@ -70,7 +70,7 @@ extension GameScene {
 
 extension GameScene:PlayerNodeProtocol {
     func died() {
-        self.score += 1
+        increesScore()
     }
     
     
