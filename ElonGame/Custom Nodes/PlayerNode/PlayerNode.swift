@@ -16,8 +16,8 @@ class PlayerNode: SKSpriteNode {
     var isFacingRight = true
     var walkingSpeed:CGFloat {
         let isEnemy = self as? EnemyNode != nil
-
-        return isEnemy ? 1.2 : (isSuperSpeed ? 10 : regularSpeed)
+        let enemySpeed = (1.2 + Double((difficulty.n * 3) / 10))
+        return (isEnemy ? enemySpeed : regularSpeed) * (isSuperSpeed ? 2 : 1)
     }
     var isSuperSpeed:Bool = false
     private var timer:Timer?
@@ -25,11 +25,11 @@ class PlayerNode: SKSpriteNode {
     var state:GKStateMachine!
     var shootingFromRight:Bool?
     var delegate:PlayerNodeProtocol?
-    
+
     func startSuperSpeed() -> Bool {
         if timer == nil {
             isSuperSpeed = true
-            timer = Timer.scheduledTimer(withTimeInterval: 7.0, repeats: false, block: { t in
+            timer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: { t in
                 self.timer?.invalidate()
                 self.timer = nil
                 self.isSuperSpeed = false
@@ -76,12 +76,18 @@ class PlayerNode: SKSpriteNode {
         GameViewController.shared?.scene?.addChild(Bullet)
     }
     
-    
+    var bulletTimerSetted:Timer?
     func bulletTouched(contact:SKPhysicsContact? = nil) {
         hitted()
         let isRight = (contact?.contactPoint ?? .zero).x - self.position.x > 0
         shootingFromRight = isRight
+        bulletTimerSetted?.invalidate()
+        bulletTimerSetted = Timer.scheduledTimer(withTimeInterval: 20.0 + Double(5 * difficulty.n), repeats: false, block: { _ in
+            self.shootingFromRight = nil
+        })
     }
+    
+    
     
     func die() {
         let dieAction = SKAction.move(to: CGPoint(x: -300, y: 0), duration: 0.1)
@@ -97,12 +103,13 @@ class PlayerNode: SKSpriteNode {
     var died = false
     var isMeteorHitted = false
     func meteorHit() {
-        isMeteorHitted = true
+        //isMeteorHitted = true
 
         hitted()
         
     }
     func hitted() {
+        isMeteorHitted = true
         state.enter(StunnedState.self)
         lifes -= 1
         if lifes != 0 {
@@ -154,6 +161,7 @@ class PlayerNode: SKSpriteNode {
     }
 
 
+    var difficulty:Difficulty = .init()
     func sceneMoved() {
         state = GKStateMachine(states: [
             JumpingState(playerNode: self, stateNum: 1),
@@ -163,6 +171,10 @@ class PlayerNode: SKSpriteNode {
             StunnedState(playerNode: self, stateNum: 6)
         ])
         state.enter(IdleState.self)
+        if let _ = self as? EnemyNode {
+          //  difficulty = .init()
+            self.lifes = 3 * (difficulty.n + 1)
+        }
     }
 
 }

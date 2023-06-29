@@ -146,3 +146,23 @@ class StunnedState:PlayerState {
         }
     }
 }
+
+
+enum Difficulty:Int {
+    case soft, light, lightMedium, medium, darkMedium, lightHard, hard, darkHard
+    
+
+    init() {
+        self = .init(rawValue: .random(in: 0..<8)) ?? .medium
+
+    }
+    
+    var n:Int {
+        switch self {
+        case .soft, .light: return 0
+        case .medium, .lightMedium, .darkMedium:return 1
+        case .hard, .darkHard, .lightHard: return 2
+
+        }
+    }
+}

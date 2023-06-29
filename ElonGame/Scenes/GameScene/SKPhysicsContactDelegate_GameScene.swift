@@ -65,14 +65,29 @@ extension GameScene:SKPhysicsContactDelegate {
         if collisions.matches(.bullet, .ground) {
             print("hgfsd")
         }
-        if collisions.matches(.bullet, .player) {
-            if let enemy = contact.matched(name: "enemy") as? PlayerNode,
-               let bullet = contact.matched(name: "bullet") as? BulletNode,
-               !bullet.touchedEnemy
-            {
-                bullet.touchedEnemy = true
-                enemy.bulletTouched(contact: contact)
+        if collisions.matches(.bullet, .bullet) {
+            print("hgfsd")
+            if let bullet = contact.matched(name: "bullet") as? BulletNode {
                 bullet.remove()
+            }
+            if let bullet = contact.matched(name: "bullet") as? BulletNode {
+                bullet.remove()
+            }
+        }
+        
+        if collisions.matches(.bullet, .player) {
+            if let bullet = contact.matched(name: "bullet") as? BulletNode,
+                !bullet.touchedEnemy {
+                bullet.touchedEnemy = true
+                bullet.remove()
+                if let enemy = contact.matched(name: "enemy") as? PlayerNode {
+                    
+                    enemy.bulletTouched(contact: contact)
+                    
+                } else if let _ = contact.matched(name: "player") as? PlayerNode {
+                    hitted()
+                }
+                
             }
         }
         if collisions.matches(.bullet, .all) {

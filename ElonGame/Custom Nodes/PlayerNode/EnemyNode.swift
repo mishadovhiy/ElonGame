@@ -61,8 +61,15 @@ class EnemyNode:PlayerNode {
         Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
             self.randomWalking()
 
+            Timer.scheduledTimer(withTimeInterval: 3.5 - Double(self.difficulty.n), repeats: true, block: { timer in
+                if self.shootingFromRight != nil && !self.died {
+                    self.spawnBullet()
+                }
+                if self.died {
+                    timer.invalidate()
+                }
+            })
         })
-
     }
     
 }
