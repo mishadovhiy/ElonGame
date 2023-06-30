@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 protocol PlayerNodeProtocol {
-    func died()
+    func enemyDied()
 }
 class PlayerNode: SKSpriteNode {
     var lifes = 5
@@ -95,7 +95,7 @@ class PlayerNode: SKSpriteNode {
         self.run(dieAction)
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
             self.died = true
-            self.delegate?.died()
+            self.delegate?.enemyDied()
             self.removeFromParent()
         })
         
