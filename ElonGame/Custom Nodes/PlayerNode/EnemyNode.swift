@@ -19,7 +19,10 @@ class EnemyNode:PlayerNode {
     func walk(completion:@escaping()->()) {
         isMoving = true
         walkCount += 1
-        move(xPosition: self.walkDirRight ? 1.5 : -1.5, deltaTime: 6, duration: 0.6)
+        let playerPosition = GameViewController.shared?.scene?.player?.position ?? .zero
+        let difference = playerPosition.x - self.position.x
+        print(difference, " hygtfrd")
+        move(xPosition: difference >= 0 ? 1.5 : -1.5, deltaTime: 6, duration: 0.6)
         Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { _ in
             self.isMoving = false
             completion()
