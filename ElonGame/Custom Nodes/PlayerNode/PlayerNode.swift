@@ -27,7 +27,7 @@ class PlayerNode: SKSpriteNode {
     var delegate:PlayerNodeProtocol?
 
     func startSuperSpeed() -> Bool {
-        if timer == nil {
+        if timer == nil && (DB.holder?.settings.game.canFast ?? false) {
             isSuperSpeed = true
             timer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: { t in
                 self.timer?.invalidate()
@@ -53,7 +53,7 @@ class PlayerNode: SKSpriteNode {
         Bullet.name = "bullet"
         Bullet.color = .red
         Bullet.size = .init(width: 20, height: 15)
-        Bullet.position = CGPoint(x: self.position.x + (30 * (isFacingRight ? 1 : -1)), y: self.position.y)
+        Bullet.position = CGPoint(x: self.position.x + (50 * (isFacingRight ? 1 : -1)), y: self.position.y)
         
         let toX = 20 * (isFacingRight ? 1 : -1)
         //let action = SKAction.moveTo(x: toX, duration: 3)

@@ -18,8 +18,17 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         GameViewController.shared = self
-        loadScene()
+        
+        DispatchQueue.init(label: "db", qos: .userInitiated).async {
+            let _ = DB.data
+            DispatchQueue.main.async {
+                self.loadScene()
+            }
+        }
+        
+        
     }
+    
     
     func loadScene(i:Int = 1) {
         if let scene = GKScene(fileNamed: "Level\(i)"),
@@ -67,16 +76,21 @@ class GameViewController: UIViewController {
         
     }
     
-    func reloadPressed(completion:(()->())? = nil) {
-        if let _ = scene {
-             AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
-             //    scene.dying()
-                 self.scene?.checkNextScene(force: true)
-                 if let compl = completion {
-                     compl()
-                 }
-             })), title: "restart the game", description: "are you sure you want to restart?")
-         }
+    func reloadPressed(completion:(()->())? = nil, force:Bool = false) {
+        if force {
+            self.scene?.checkNextScene(force: true)
+        } else {
+            if let _ = scene {
+                 AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
+                 //    scene.dying()
+                     self.scene?.checkNextScene(force: true)
+                     if let compl = completion {
+                         compl()
+                     }
+                 })), title: "restart the game", description: "are you sure you want to restart?")
+             }
+        }
+        
     }
     
     

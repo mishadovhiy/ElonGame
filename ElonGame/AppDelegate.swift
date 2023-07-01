@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var dbHolder:[String:Any]?
     static var shared:AppDelegate?
     lazy var ai:AlertViewLibrary = .instanceFromNib(.init(text: .init(), colors: .init()))
 

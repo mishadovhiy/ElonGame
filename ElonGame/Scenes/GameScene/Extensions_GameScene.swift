@@ -68,24 +68,21 @@ extension GameScene {
     
     
     func createEnemies() {
-        //childeNode named "flour" - width
-        //поделить width на кол во enemies (10) - добавлять enemies
+        
+        if !(DB.holder?.settings.game.needEnemies ?? false) {
+            return
+        }
         let count = 10
         let width = (childNode(withName: "flour")?.frame.width ?? 0) / CGFloat(count)
         
         for i in 0..<count {
-       //     guard let img:UIImage = .init(named: "player/0") else { return }
             let enemy = EnemyNode(imageNamed: "player/0")
-        //EnemyNode(imageNamed: "player/0")
-        enemy.size = .init(width: 36, height: 49)
-        //self.player?.size ?? .zero
-        //EnemyNode(texture: .init(image: img), color: .clear, size: self.player?.size ?? .zero)
+            enemy.size = .init(width: 36, height: 49)
             enemy.name = "enemy"
-            print(frame.width, " njyhtbgrvf")
-        
+            
             enemy.position = .init(x: width * CGFloat(-1 * i), y: 200)
-        enemy.zPosition = 10
-        
+            enemy.zPosition = 10
+            
             let phBody = SKPhysicsBody(circleOfRadius: 10)
             phBody.categoryBitMask = PhysicCategory.Mask.player.bitmask
             phBody.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
@@ -95,13 +92,19 @@ extension GameScene {
             phBody.allowsRotation = false
             phBody.restitution = 0.2
             phBody.friction = 1.0
-        
+            
             enemy.physicsBody = phBody
             addChild(enemy)
         }
-        
+        enumerateChildNodes(withName: "enemy", using: {node,point in
+            if let enemy = node as? EnemyNode {
+                enemy.delegate = self
+                enemy.sceneMoved()
+                //     self.rewardCount += 1
+            }
+        })
     }
-
+    
     
     
     func spawnMeteor() {
@@ -128,7 +131,7 @@ extension GameScene {
         phBody.restitution = 0.2
         phBody.friction = 1.0
         phBody.density = 0.01//test
-
+        
         node.physicsBody = phBody
         
         addChild(node)
@@ -150,11 +153,69 @@ extension GameScene {
         
         node.run(action)
     }
+    
+    func additionalUI() {
+        enumerateChildNodes(withName: "jewel", using: {_,_ in
+            self.rewardCount += 1
+        })
+        scoreLabel.position = .init(x: (self.cameraNode?.position.x ?? 0) + 310, y: 140)
+        scoreLabel.fontColor = .orange
+        scoreLabel.fontSize = 24
+        scoreLabel.fontName = "AvenirNext-Bold"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.text = "\(score)"
+        addChild(scoreLabel)
+        
+        
+        heartContainer.position = CGPoint(x: -300, y: 140)
+        heartContainer.zPosition = 5
+        cameraNode?.addChild(heartContainer)
+        fillHearts(count: player?.lifes ?? 1)
+        
+        self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
+        self.backgroundPlayer?.playSound()
+        self.backgroundPlayer?.numberOfLoops = -1
+        
+        if let state = player?.state.currentState as? PlayerState {
+            state.delegate = self
+        }
+        
+    }
+    
+    func setChilds() {
+        player = childNode(withName: "player") as? PlayerNode
+        player?.sceneMoved()
+        print(player!.walkingSpeed)
+        joystick = childNode(withName: "joystic")
+        joystickKnob = joystick?.childNode(withName: "controllIndicator")
+        cameraNode = childNode(withName: "cameraNode") as? SKCameraNode
+        
+        mount1 = childNode(withName: "mount1")
+        mount2 = childNode(withName: "mount2")
+        mount3 = childNode(withName: "mount3")
+        moon = childNode(withName: "moon")
+        stars = childNode(withName: "stars")
+        flour = childNode(withName: "flour")
+    }
+    
+    func setupMeteor() {
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { timer in
+            if self.presenting {
+                if DB.holder?.settings.game.enubleMeteors ?? false {
+                    self.spawnMeteor()
+                }
+                
+            } else {
+                timer.invalidate()
+            }
+        })
+        
+    }
 }
 
 extension GameScene:PlayerNodeProtocol {
     func enemyDied() {
-     //   increesScore()
+        //   increesScore()
     }
     
     

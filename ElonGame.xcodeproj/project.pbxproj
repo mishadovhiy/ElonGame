@@ -36,6 +36,7 @@
 		8D487A162A4FB94C00A4EC75 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D487A152A4FB94C00A4EC75 /* Cell.swift */; };
 		8D487A1A2A4FC30100A4EC75 /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D487A192A4FC30100A4EC75 /* SectionCell.swift */; };
 		8D487A1C2A4FC63000A4EC75 /* Extensions_SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D487A1B2A4FC63000A4EC75 /* Extensions_SettingsVC.swift */; };
+		8D487A1E2A4FC98B00A4EC75 /* SuperScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D487A1D2A4FC98B00A4EC75 /* SuperScene.swift */; };
 		8D61738129D9ECDB008F6607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738029D9ECDB008F6607 /* AppDelegate.swift */; };
 		8D61738329D9ECDB008F6607 /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D61738229D9ECDB008F6607 /* Level1.sks */; };
 		8D61738729D9ECDB008F6607 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D61738629D9ECDB008F6607 /* GameScene.swift */; };
@@ -85,6 +86,7 @@
 		8D487A152A4FB94C00A4EC75 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		8D487A192A4FC30100A4EC75 /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
 		8D487A1B2A4FC63000A4EC75 /* Extensions_SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_SettingsVC.swift; sourceTree = "<group>"; };
+		8D487A1D2A4FC98B00A4EC75 /* SuperScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperScene.swift; sourceTree = "<group>"; };
 		8D61737D29D9ECDB008F6607 /* ElonGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElonGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D61738029D9ECDB008F6607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D61738229D9ECDB008F6607 /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
@@ -193,8 +195,9 @@
 		8D487A172A4FB95200A4EC75 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				8D487A152A4FB94C00A4EC75 /* Cell.swift */,
 				8DD9BA7F29E77C6E001A667D /* AlertViewLibrary */,
+				8D487A152A4FB94C00A4EC75 /* Cell.swift */,
+				8D487A1D2A4FC98B00A4EC75 /* SuperScene.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				8D487A132A4FB8DD00A4EC75 /* SwitchCell.swift in Sources */,
 				8D378FEC29F73A21000179D2 /* AudioPlayer.swift in Sources */,
 				8D313C6529FEFE9D00BF72E4 /* PhysicCategory.swift in Sources */,
+				8D487A1E2A4FC98B00A4EC75 /* SuperScene.swift in Sources */,
 				8D903E862A4D458E0059C59E /* EnemyNode.swift in Sources */,
 				8D378FE729F7168B000179D2 /* Sounds.swift in Sources */,
 				8D37C4F029F9D95C006A5633 /* PlayerNode.swift in Sources */,

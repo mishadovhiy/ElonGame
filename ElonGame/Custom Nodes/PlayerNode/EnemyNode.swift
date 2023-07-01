@@ -62,15 +62,17 @@ class EnemyNode:PlayerNode {
         self.walkDirHolder = walkDirRight
         Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
             self.randomWalking()
-
+            
             Timer.scheduledTimer(withTimeInterval: 3.5 - Double(self.difficulty.n), repeats: true, block: { timer in
-                if self.shootingFromRight != nil && !self.died {
+                let can = self.shootingFromRight != nil && !self.died && DB.holder?.settings.game.enamieCanShoot ?? false
+                if can {
                     self.spawnBullet()
                 }
                 if self.died {
                     timer.invalidate()
                 }
             })
+            
         })
     }
     

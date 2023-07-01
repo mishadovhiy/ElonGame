@@ -8,19 +8,23 @@
 import Foundation
 
 struct DB {
-    static var holder:DataBase?
+    static var holder:DataBase? {
+        get {
+            return .init(dict: AppDelegate.shared?.dbHolder ?? [:])
+        }
+    }
     static var data:DataBase {
         get {
-            if let holder = DB.holder {
-                return holder
+            if let holder = AppDelegate.shared?.dbHolder {
+                return .init(dict: holder)
             } else {
                 let db:DataBase = .init(dict: UserDefaults.standard.value(forKey: "DataBase") as? [String:Any] ?? [:])
-                DB.holder = db
+                AppDelegate.shared?.dbHolder = db.dict
                 return db
             }
         }
         set {
-            DB.holder = newValue
+            AppDelegate.shared?.dbHolder = newValue.dict
             UserDefaults.standard.setValue(newValue.dict, forKey: "DataBase")
         }
     }

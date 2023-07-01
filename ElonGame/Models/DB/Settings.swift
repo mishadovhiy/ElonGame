@@ -16,10 +16,10 @@ extension DB {
         
         var game:Game {
             get {
-                return .init(dict: dict["game"] as? [String:Any] ?? [:])
+                return .init(dict: dict["gamee"] as? [String:Any] ?? [:])
             }
             set {
-                dict.updateValue(newValue.dict, forKey: "game")
+                dict.updateValue(newValue.dict, forKey: "gamee")
             }
         }
         
@@ -31,10 +31,37 @@ extension DB {
             
             var enubleMeteors:Bool {
                 get {
-                    return dict["enubleMeteors"] as? Bool ?? false
+                    return dict["enubleMeteors"] as? Bool ?? true
                 }
                 set {
                     dict.updateValue(newValue, forKey: "enubleMeteors")
+                }
+            }
+            
+            var needEnemies:Bool {
+                get {
+                    return dict["needEnemies"] as? Bool ?? true
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "needEnemies")
+                }
+            }
+            
+            var enamieCanShoot:Bool {
+                get {
+                    return dict["enamieCanShoot"] as? Bool ?? true
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "enamieCanShoot")
+                }
+            }
+            
+            var canFast:Bool {
+                get {
+                    return dict["canFast"] as? Bool ?? true
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "canFast")
                 }
             }
         }
