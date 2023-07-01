@@ -142,19 +142,26 @@ class GameScene: SuperScene {
             } else {
                 GameViewController.shared?.currentScene += 1
             }
-            if let next = GameScene(fileNamed: "Level\(GameViewController.shared?.currentScene ?? 0)")
+          /*  if let next = GameScene(fileNamed: "Level\(GameViewController.shared?.currentScene ?? 0)")
             {
                 self.run(Sound.levelUp.action)
-                next.scaleMode = .aspectFill
-                self.view?.presentScene(next)
-                GameViewController.shared?.scene = next
+             //   next.scaleMode = .aspectFill
+               // self.view?.presentScene(next)
+          /*      (
+                    GameViewController.shared?.view as? SKView
+                )?.presentScene(next)
+                GameViewController.shared?.scene = next*/
+                GameViewController.shared?.loadScene()
                 self.removeFromParent()
                 
             } else {
                 GameViewController.shared?.currentScene = 0
                 self.checkNextScene(force: true)
                 print("no more scenes")
-            }
+            }*/
+            run(Sound.levelUp.action)
+            GameViewController.shared?.loadScene(i:GameViewController.shared?.currentScene ?? 0)
+            removeFromParent()
         }
     }
     func hitted(by:SKSpriteNode? = nil) {

@@ -39,9 +39,9 @@ extension GameScene:SKPhysicsContactDelegate {
                !node.touched
             {
                 if let _ = node as? JewelSpeed {
-                    if player?.startSuperSpeed() ?? false {
+                    let _ = player?.startSuperSpeed()
                         removeJewel(node)
-                    }
+                  //  }
                 } else {
                     removeJewel(node)
                 }

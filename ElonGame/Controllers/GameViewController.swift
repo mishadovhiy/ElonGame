@@ -21,19 +21,21 @@ class GameViewController: UIViewController {
         loadScene()
     }
     
-    func loadScene() {
-        if let scene = GKScene(fileNamed: "Level1"),
+    func loadScene(i:Int = 1) {
+        if let scene = GKScene(fileNamed: "Level\(i)"),
            let sceneNode = scene.rootNode as! GameScene?
         {
             self.scene = sceneNode
             sceneNode.scaleMode = .aspectFill
             if let view = self.view as! SKView? {
-                self.currentScene = 1
+                self.currentScene = i
                 view.presentScene(sceneNode)
                 view.ignoresSiblingOrder = false
                 view.showsFPS = true
                 view.showsNodeCount = true
             }
+        } else {
+            self.loadScene(i:1)
         }
 
         
@@ -63,7 +65,9 @@ class GameViewController: UIViewController {
     @IBAction func reloadPressed(_ sender: Any) {
         if let scene = scene {
             AppDelegate.shared?.ai.showAlert(buttons: (.init(title: "cancel", style: .grey, close: true, action: nil), .init(title: "ok", style: .linkBackground, close: true, action: {_ in
-                scene.dying()
+            //    scene.dying()
+                scene.checkNextScene(force: true)
+                
             })), title: "restart the game", description: "are you sure you want to restart?")
         }
         
