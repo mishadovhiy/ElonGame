@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,10 +18,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyW-Lz-3xl">
-                                <rect key="frame" x="0.0" y="59" width="71.666666666666671" height="35"/>
+                                <rect key="frame" x="0.0" y="59.000000000000007" width="61.333333333333336" height="27.333333333333336"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="reload"/>
+                                <buttonConfiguration key="configuration" style="plain" title="● ● ●">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="11"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="reloadPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LfG-Ve-6CR"/>
                                 </connections>
@@ -59,6 +61,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="10" y="-2"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="oeo-Ft-rfY">
+            <objects>
+                <viewController storyboardIdentifier="SettingsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Mk-st-j9o" customClass="SettingsVC" customModule="ElonGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cnC-gk-TIL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7LB-kc-q60">
+                                <rect key="frame" x="0.0" y="103.33333333333331" width="393" height="748.66666666666674"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegularCell" id="W2f-JP-Kxh" customClass="RegularCell" customModule="ElonGame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W2f-JP-Kxh" id="TFO-tl-RYv">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ey-Ht-BS2">
+                                                    <rect key="frame" x="10" y="12.000000000000002" width="373" height="20.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="1ey-Ht-BS2" firstAttribute="top" secondItem="TFO-tl-RYv" secondAttribute="top" constant="12" id="Do9-4c-7ct"/>
+                                                <constraint firstAttribute="bottom" secondItem="1ey-Ht-BS2" secondAttribute="bottom" constant="12" id="FM2-f1-a1o"/>
+                                                <constraint firstItem="1ey-Ht-BS2" firstAttribute="leading" secondItem="TFO-tl-RYv" secondAttribute="leading" constant="10" id="Lso-fI-sU8"/>
+                                                <constraint firstAttribute="trailing" secondItem="1ey-Ht-BS2" secondAttribute="trailing" constant="10" id="NuX-Wz-sQs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="1ey-Ht-BS2" id="GqJ-Oh-bIS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" id="i6A-rT-r0V" customClass="SwitchCell" customModule="ElonGame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="94.666667938232422" width="393" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i6A-rT-r0V" id="Pce-eU-7G3">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAq-7e-e8R">
+                                                    <rect key="frame" x="10" y="12.000000000000002" width="319" height="20.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WCb-aW-dn4">
+                                                    <rect key="frame" x="334" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchChanged:" destination="i6A-rT-r0V" eventType="valueChanged" id="IyB-Uo-d21"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="WCb-aW-dn4" firstAttribute="centerY" secondItem="xAq-7e-e8R" secondAttribute="centerY" id="4RS-bS-Dh2"/>
+                                                <constraint firstItem="WCb-aW-dn4" firstAttribute="leading" secondItem="xAq-7e-e8R" secondAttribute="trailing" constant="5" id="F65-Ee-pvB"/>
+                                                <constraint firstItem="xAq-7e-e8R" firstAttribute="top" secondItem="Pce-eU-7G3" secondAttribute="top" constant="12" id="KL6-9d-wZn"/>
+                                                <constraint firstAttribute="trailing" secondItem="WCb-aW-dn4" secondAttribute="trailing" constant="10" id="Llt-Wb-THC"/>
+                                                <constraint firstItem="xAq-7e-e8R" firstAttribute="leading" secondItem="Pce-eU-7G3" secondAttribute="leading" constant="10" id="MAU-V0-unK"/>
+                                                <constraint firstAttribute="bottom" secondItem="xAq-7e-e8R" secondAttribute="bottom" constant="12" id="o47-hb-Nmz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="switchView" destination="WCb-aW-dn4" id="Wd5-TC-o5Y"/>
+                                            <outlet property="titleLabel" destination="xAq-7e-e8R" id="Py7-tD-7CH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionCell" id="RBQ-9n-krM" customClass="SectionCell" customModule="ElonGame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="139.33333587646484" width="393" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RBQ-9n-krM" id="fkP-vH-l78">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfV-vo-D5q">
+                                                    <rect key="frame" x="10" y="8" width="373" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="yfV-vo-D5q" firstAttribute="top" secondItem="fkP-vH-l78" secondAttribute="top" constant="8" id="PUc-fn-s6T"/>
+                                                <constraint firstItem="yfV-vo-D5q" firstAttribute="leading" secondItem="fkP-vH-l78" secondAttribute="leading" constant="10" id="akx-ZP-wyZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="yfV-vo-D5q" secondAttribute="bottom" constant="8" id="mhi-eX-7UF"/>
+                                                <constraint firstAttribute="trailing" secondItem="yfV-vo-D5q" secondAttribute="trailing" constant="10" id="u4L-Gi-8XH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="yfV-vo-D5q" id="6WG-YG-fQg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3PM-uF-9Z9">
+                                <rect key="frame" x="318.66666666666669" y="69" width="64.333333333333314" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="close"/>
+                                <connections>
+                                    <action selector="closePressed:" destination="7Mk-st-j9o" eventType="touchUpInside" id="6qv-Jh-Dz7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Fmb-Iw-2pE"/>
+                        <color key="backgroundColor" red="0.14321524064171121" green="0.14321524064171121" blue="0.14321524064171121" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="7LB-kc-q60" firstAttribute="trailing" secondItem="Fmb-Iw-2pE" secondAttribute="trailing" id="8K5-sM-ode"/>
+                            <constraint firstItem="Fmb-Iw-2pE" firstAttribute="trailing" secondItem="3PM-uF-9Z9" secondAttribute="trailing" constant="10" id="J75-ph-04F"/>
+                            <constraint firstItem="7LB-kc-q60" firstAttribute="leading" secondItem="Fmb-Iw-2pE" secondAttribute="leading" id="Nfr-VK-Bu1"/>
+                            <constraint firstAttribute="bottom" secondItem="7LB-kc-q60" secondAttribute="bottom" id="T6g-ez-DlB"/>
+                            <constraint firstItem="7LB-kc-q60" firstAttribute="top" secondItem="3PM-uF-9Z9" secondAttribute="bottom" id="fkb-S8-dQs"/>
+                            <constraint firstItem="3PM-uF-9Z9" firstAttribute="top" secondItem="Fmb-Iw-2pE" secondAttribute="top" constant="10" id="v8U-gs-Myf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="3PM-uF-9Z9" id="2WY-XE-EoU"/>
+                        <outlet property="tableView" destination="7LB-kc-q60" id="9MJ-l6-CLI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vRV-jJ-qKv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="16"/>
         </scene>
     </scenes>
     <resources>
