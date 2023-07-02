@@ -25,7 +25,7 @@ class EnemyNode:PlayerNode {
             self.randomWalking()
             
             Timer.scheduledTimer(withTimeInterval: 3.5 - Double(self.difficulty.n), repeats: true, block: { timer in
-                let can = self.shootingFromRight != nil && !self.died && DB.holder?.settings.game.enamieCanShoot ?? false
+                let can = !(self.specialAbility[.shootReceived] ?? false) && !self.died && DB.holder?.settings.game.enamieCanShoot ?? false
                 if can {
                     self.spawnBullet()
                 }
@@ -58,11 +58,11 @@ class EnemyNode:PlayerNode {
                         self.randomWalking()
                     }
                     if self.walkCount > 100 {
-                        self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
+                        self.walkDirRight = self.specialAbility[.shootReceived] ?? self.walkDirHolder
                         self.walkCount = 0
                     }
-                    if self.shootingFromRight != self.walkDirRight {
-                        self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
+                    if self.self.specialAbility[.shootReceived] != self.walkDirRight {
+                        self.walkDirRight = self.specialAbility[.shootReceived] ?? self.walkDirHolder
                         self.walkCount = 0
                     }
                 }

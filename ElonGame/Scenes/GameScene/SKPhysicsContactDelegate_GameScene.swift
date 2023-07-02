@@ -39,8 +39,16 @@ extension GameScene:SKPhysicsContactDelegate {
                !node.touched
             {
                 if let _ = node as? JewelSpeed {
-                    let _ = player?.startSuperSpeed()
+                    let _ = player?.startSuper(.superSpeed)
                         removeJewel(node)
+                } else if let _ = node as? JewelShoot {
+                    let _ = player?.startSuper(.superShoot)
+                    removeJewel(node)
+
+                } else if let _ = node as? JewelInvisible {
+                    let _ = player?.startSuper(.superInvisible)
+                    removeJewel(node)
+
                 } else {
                     removeJewel(node)
                 }
@@ -81,13 +89,17 @@ extension GameScene:SKPhysicsContactDelegate {
             if let bullet = contact.matched(name: "bullet") as? BulletNode,
                 !bullet.touchedEnemy {
                 bullet.touchedEnemy = true
-                bullet.remove()
+                if !bullet.isBig {
+                    bullet.remove()
+                }
                 if let enemy = contact.matched(name: "enemy") as? PlayerNode {
                     
                     enemy.bulletTouched(contact: contact)
                     
-                } else if let _ = contact.matched(name: "player") as? PlayerNode {
-                    hitted(by: bullet)
+                } else if let playerContact = contact.matched(name: "player") as? PlayerNode {
+                    if bullet.player != playerContact {
+                        hitted(by: bullet)
+                    }
                 }
                 
             }

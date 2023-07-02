@@ -12,6 +12,14 @@ class BulletNode:SKSpriteNode {
     var player:PlayerNode?
     var touchedEnemy = false
     
+    var isBig:Bool {
+        let r = self.frame.width >= 25
+        if r {
+            print("hgrfedws")
+        }
+        return r
+    }
+    
     func remove() {
         player?.canSpawnBullets = true
         self.removeFromParent()

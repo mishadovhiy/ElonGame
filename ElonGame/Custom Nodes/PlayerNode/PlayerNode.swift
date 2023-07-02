@@ -15,31 +15,37 @@ class PlayerNode: SKSpriteNode {
     private let regularSpeed: CGFloat = 5
     var isFacingRight = true
     var walkingSpeed:CGFloat {
+        let isSuperSpeed = specialAbility[.superSpeed] ?? false
         let isEnemy = self as? EnemyNode != nil
         let enemySpeed = (1.2 + Double((difficulty.n * 3) / 10))
-        return (isEnemy ? enemySpeed : regularSpeed) * (isSuperSpeed ? 2 : 1)
+        return (isEnemy ? enemySpeed : regularSpeed) * (isSuperSpeed ? 1.7 : 1)
     }
-    var isSuperSpeed:Bool = false
-    private var timer:Timer?
+    private var timer:[String:Timer] = [:]
     var canSpawnBullets = true
     var state:GKStateMachine!
-    var shootingFromRight:Bool?
     var delegate:PlayerNodeProtocol?
 
-    func startSuperSpeed() -> Bool {
-        if timer == nil && (DB.holder?.settings.game.canFast ?? false) {
-            isSuperSpeed = true
-            timer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: { t in
-                self.timer?.invalidate()
-                self.timer = nil
-                self.isSuperSpeed = false
+    var specialAbility:[PlayerAbility:Bool] = [:]
+    
+    func startSuper(_ value:PlayerAbility) -> Bool {
+        if value == .superInvisible {
+            self.invincible(time: 15)
+            return true
+        }
+        if value == .superSpeed && !(DB.holder?.settings.game.canFast ?? false) {
+            return false
+        }
+        if timer[value.rawValue] == nil {
+            specialAbility.updateValue(true, forKey: value)
+            startSuper(key: value.rawValue, time: value == .superShoot ? 25 : 15, ended: {
+                self.specialAbility.updateValue(false, forKey: value)
             })
             return true
         } else {
             return false
         }
-        
     }
+    
     
     
     func spawnBullet(){
@@ -52,10 +58,10 @@ class PlayerNode: SKSpriteNode {
         Bullet.player = self
         Bullet.name = "bullet"
         Bullet.color = .red
-        Bullet.size = .init(width: 20, height: 15)
+        let val = specialAbility[.superShoot] ?? false
+        Bullet.size = .init(width: val ? 50 : 20, height: val ? 45 : 15)
         Bullet.position = CGPoint(x: self.position.x + (50 * (isFacingRight ? 1 : -1)), y: self.position.y)
-        
-        let toX = (20) * (isFacingRight ? 1 : -1)
+        let toX = (val ? 100 : 20) * (isFacingRight ? 1 : -1)
         //let action = SKAction.moveTo(x: toX, duration: 3)
         let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: 1)
         
@@ -76,15 +82,16 @@ class PlayerNode: SKSpriteNode {
         GameViewController.shared?.scene?.addChild(Bullet)
     }
     
-    var bulletTimerSetted:Timer?
     func bulletTouched(contact:SKPhysicsContact? = nil) {
         hitted()
         let isRight = (contact?.contactPoint ?? .zero).x - self.position.x > 0
-        shootingFromRight = isRight
-        bulletTimerSetted?.invalidate()
-        bulletTimerSetted = Timer.scheduledTimer(withTimeInterval: 20.0 + Double(5 * difficulty.n), repeats: false, block: { _ in
-            self.shootingFromRight = nil
-        })
+     //   shootingFromRight = isRight
+     //   bulletTimerSetted?.invalidate()
+        if isRight {
+            startSuperTimer(key: .shootReceived,
+                            time: 20.0 + Double(5 * difficulty.n))
+
+        }
     }
     
     
@@ -101,17 +108,16 @@ class PlayerNode: SKSpriteNode {
         
     }
     var died = false
-    var isMeteorHitted = false
+    //var isMeteorHitted = false
     
     func meteorHit(by:SKSpriteNode? = nil) {
-        //isMeteorHitted = true
         hitted(node: by)
         
     }
     func hitPower(node:SKSpriteNode?) -> Int {
         if let node = node {
             if let bullet = node as? BulletNode {
-                return (bullet.player?.difficulty.n ?? 0) + 1
+                return (bullet.player?.difficulty.n ?? 0) + (bullet.isBig ? 3 : 1)
             } else {
                 return 1
             }
@@ -121,7 +127,8 @@ class PlayerNode: SKSpriteNode {
     }
     
     func hitted(node:SKSpriteNode? = nil) {
-        isMeteorHitted = true
+      //  isMeteorHitted = true
+        specialAbility.updateValue(true, forKey: .meteorReceived)
         state.enter(StunnedState.self)
         lifes -= hitPower(node: node)
         if lifes != 0 {
@@ -135,12 +142,13 @@ class PlayerNode: SKSpriteNode {
         }
     }
     
-    func invincible() {
+    func invincible(time:TimeInterval = 2) {
         self.physicsBody?.categoryBitMask = 0
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
-            self.isMeteorHitted = false
+        self.startSuperTimer(key: .meteorReceived, time: time, ended: {
             self.physicsBody?.categoryBitMask = 2
-        }
+        })
+
+        
     }
     
     
@@ -195,5 +203,32 @@ class PlayerNode: SKSpriteNode {
         }
     }
 
+    enum PlayerAbility:String {
+        case superSpeed = "superSpeed"
+        case invisible = "invisible"
+        case superInvisible = "superInvisible"
+
+        case superShoot = "superShoot"
+        case shootReceived = "shootReceived"
+        case meteorReceived = "meteorReceived"
+    }
+
+    
+    
+    private func startSuper(key:String, time:TimeInterval, ended:(()->())? = nil) {
+        let timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false, block: { t in
+            self.timer[key]?.invalidate()
+            self.timer.removeValue(forKey: key)
+            t.invalidate()
+            if let ended = ended {
+                ended()
+            }
+        })
+        self.timer.updateValue(timer, forKey: key)
+    }
+    
+    private func startSuperTimer(key:PlayerAbility, time:TimeInterval, ended:(()->())? = nil) {
+        self.startSuper(key: key.rawValue, time: time, ended: ended)
+    }
 }
 

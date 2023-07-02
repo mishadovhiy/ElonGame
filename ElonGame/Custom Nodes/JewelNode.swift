@@ -17,3 +17,11 @@ class JewelNode:SKSpriteNode {
 class JewelSpeed:JewelNode {
     
 }
+
+class JewelInvisible:JewelNode {
+    
+}
+
+class JewelShoot:JewelNode {
+    
+}

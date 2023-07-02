@@ -40,7 +40,7 @@ extension GameScene {
     }
     
     func loseHeart() {
-        if player?.isMeteorHitted ?? false {
+        if player?.specialAbility[.meteorReceived] ?? false {
             let lastElementIndex = heartsArray.count - 1
             if heartsArray.indices.contains(lastElementIndex - 1) {
                 let lastHeart = heartsArray[lastElementIndex]
