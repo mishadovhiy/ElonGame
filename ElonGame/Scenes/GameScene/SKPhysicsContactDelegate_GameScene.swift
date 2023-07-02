@@ -57,6 +57,12 @@ extension GameScene:SKPhysicsContactDelegate {
             
         }
         
+        if collisions.matches(.reward, .killing) {
+            if let node = contact.matched(name: "jewel") as? JewelNode, !node.touched {
+                removeJewel(node)
+            }
+        }
+        
         if collisions.matches(.player, .killing) {
             if let _ = contact.matched(name: "player") {
                 self.hitted()
