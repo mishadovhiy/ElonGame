@@ -13,6 +13,14 @@ class GameScene: SuperScene {
     var player : PlayerNode?
     var joystick : SKNode?
     var joystickKnob : SKNode?
+    /*
+     var joystick : UIView? {
+         return GameViewController.shared?.joysticView
+     }
+     var joystickKnob : UIView? {
+         return GameViewController.shared?.knobView
+     }
+     */
     var cameraNode:SKCameraNode?
     var mount3:SKNode?
     var mount1:SKNode?

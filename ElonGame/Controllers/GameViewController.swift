@@ -12,6 +12,11 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     @IBOutlet weak var fireButton: UIButton!
+    
+    @IBOutlet weak var joysticView: UIView!
+    @IBOutlet weak var knobView: UIImageView!
+    
+    
     static var shared:GameViewController?
     var currentScene:Int = 0
     var scene:GameScene?

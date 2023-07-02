@@ -14,6 +14,9 @@ extension GameScene {
         let moveBack = SKAction.move(to: initialPoint, duration: 0.1)
         moveBack.timingMode = .linear
         joystickKnob?.run(moveBack)
+      /*  UIView.animate(withDuration: 0.1, animations: {
+            self.joystickKnob?.layer.position = initialPoint
+        })*/
         joystickAction = false
     }
     
