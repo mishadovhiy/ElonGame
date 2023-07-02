@@ -55,7 +55,7 @@ class PlayerNode: SKSpriteNode {
         Bullet.size = .init(width: 20, height: 15)
         Bullet.position = CGPoint(x: self.position.x + (50 * (isFacingRight ? 1 : -1)), y: self.position.y)
         
-        let toX = 20 * (isFacingRight ? 1 : -1)
+        let toX = (20) * (isFacingRight ? 1 : -1)
         //let action = SKAction.moveTo(x: toX, duration: 3)
         let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: 1)
         
@@ -68,9 +68,9 @@ class PlayerNode: SKSpriteNode {
         Bullet.physicsBody = SKPhysicsBody(rectangleOf: Bullet.size)
         Bullet.physicsBody?.allowsRotation = false
         Bullet.physicsBody?.categoryBitMask = PhysicCategory.Mask.bullet.bitmask
-        Bullet.physicsBody?.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
-        Bullet.physicsBody?.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
-        Bullet.physicsBody?.fieldBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
+        Bullet.physicsBody?.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.all.bitmask
+        Bullet.physicsBody?.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.all.bitmask
+        Bullet.physicsBody?.fieldBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.all.bitmask
         Bullet.physicsBody?.affectedByGravity = false
         Bullet.physicsBody?.isDynamic = true
         GameViewController.shared?.scene?.addChild(Bullet)

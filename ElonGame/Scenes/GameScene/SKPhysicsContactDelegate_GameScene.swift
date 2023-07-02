@@ -53,7 +53,10 @@ extension GameScene:SKPhysicsContactDelegate {
             if let _ = contact.matched(name: "player") {
                 self.hitted()
             } else if let enemy = contact.matched(name: "enemy") as? PlayerNode {
-                enemy.meteorHit()
+                if DB.holder?.settings.game.contactMeteorEnemy ?? false {
+                    enemy.meteorHit()
+                }
+                
             }
             
         }

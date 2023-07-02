@@ -64,6 +64,24 @@ extension DB {
                     dict.updateValue(newValue, forKey: "canFast")
                 }
             }
+            
+            var contactMeteorEnemy:Bool {
+                get {
+                    return dict["contactMeteorEnemy"] as? Bool ?? true
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "contactMeteorEnemy")
+                }
+            }
+            
+            var backgroundSound:Bool {
+                get {
+                    return dict["backgroundSound"] as? Bool ?? true
+                }
+                set {
+                    dict.updateValue(newValue, forKey: "backgroundSound")
+                }
+            }
         }
     }
 }

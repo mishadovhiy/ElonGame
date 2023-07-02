@@ -32,7 +32,7 @@ class SettingsVC: UIViewController {
     func createData() -> [SettingsData] {
         let data = db?.settings ?? .init(dict: [:])
         return [
-            .init(sectionTitle:"Game", data: [
+            .init(sectionTitle:"game", data: [
                 .init(name: "enuble meteors", switchData: .init(isOn: data.game.enubleMeteors, switched: {
                     self.db?.settings.game.enubleMeteors = $0
                 })),
@@ -45,9 +45,15 @@ class SettingsVC: UIViewController {
                 })),
                 .init(name: "player super speed", switchData: .init(isOn: data.game.canFast, switched: {
                     self.db?.settings.game.canFast = $0
+                })),
+                .init(name: "contact: meteor - player", switchData: .init(isOn: data.game.contactMeteorEnemy, switched: {
+                    self.db?.settings.game.contactMeteorEnemy = $0
+                })),
+                .init(name: "need background sound", switchData: .init(isOn: data.game.backgroundSound, switched: {
+                    self.db?.settings.game.backgroundSound = $0
                 }))
             ]),
-            .init(sectionTitle: "Other settings", data: [
+            .init(sectionTitle: "other settings", data: [
                 .init(name: "reload", regulare: .init(pressed: reloadPressed))
             ])
         ]

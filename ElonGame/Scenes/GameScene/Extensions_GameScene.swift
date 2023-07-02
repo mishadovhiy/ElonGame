@@ -83,7 +83,7 @@ extension GameScene {
             enemy.position = .init(x: width * CGFloat(-1 * i), y: 200)
             enemy.zPosition = 10
             
-            let phBody = SKPhysicsBody(circleOfRadius: 10)
+            let phBody = SKPhysicsBody(circleOfRadius: 20)
             phBody.categoryBitMask = PhysicCategory.Mask.player.bitmask
             phBody.collisionBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
             phBody.contactTestBitMask = PhysicCategory.Mask.player.bitmask | PhysicCategory.Mask.ground.bitmask
@@ -172,7 +172,9 @@ extension GameScene {
         cameraNode?.addChild(heartContainer)
         fillHearts(count: player?.lifes ?? 1)
         
-        self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
+        if DB.holder?.settings.game.backgroundSound ?? false {
+            self.backgroundPlayer = .init(sound: .init(name: "music"), valume: 0.1)
+        }
         self.backgroundPlayer?.playSound()
         self.backgroundPlayer?.numberOfLoops = -1
         

@@ -16,6 +16,7 @@ extension SettingsVC {
     
     func getData() {
         DispatchQueue.init(label: "db", qos: .userInitiated).async {
+            self.db = DB.data
             self.tableData = self.createData()
             DispatchQueue.main.async {
                 if self.tableView.delegate == nil {
