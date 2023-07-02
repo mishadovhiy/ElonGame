@@ -72,12 +72,14 @@ extension GameScene {
         if !(DB.holder?.settings.game.needEnemies ?? false) {
             return
         }
-        let count = 10
+        let count = (5 * (currentScene + 1))
         let width = (childNode(withName: "flour")?.frame.width ?? 0) / CGFloat(count)
         
         for i in 0..<count {
             let enemy = EnemyNode(imageNamed: "player/0")
-            enemy.size = .init(width: 36, height: 49)
+            let dific = enemy.difficulty
+            
+            enemy.size = .init(width: 36 + (dific.n * 10), height: 49 + (dific.n * 10))
             enemy.name = "enemy"
             
             enemy.position = .init(x: width * CGFloat(-1 * i), y: 200)

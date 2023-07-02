@@ -19,9 +19,8 @@
 		8D378FD329F66718000179D2 /* hitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FCC29F66718000179D2 /* hitSound.wav */; };
 		8D378FD529F66761000179D2 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FD429F66761000179D2 /* GameOver.sks */; };
 		8D378FD729F667B3000179D2 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FD629F667B3000179D2 /* GameOver.swift */; };
-		8D378FDA29F66BC8000179D2 /* Level1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FD929F66BC8000179D2 /* Level1.swift */; };
+		8D378FDA29F66BC8000179D2 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FD929F66BC8000179D2 /* Levels.swift */; };
 		8D378FDC29F66BFD000179D2 /* Extensions_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FDB29F66BFD000179D2 /* Extensions_GameScene.swift */; };
-		8D378FDF29F66D94000179D2 /* Level2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FDE29F66D94000179D2 /* Level2.swift */; };
 		8D378FE329F66F07000179D2 /* Level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D378FE229F66F07000179D2 /* Level2.sks */; };
 		8D378FE729F7168B000179D2 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FE629F7168B000179D2 /* Sounds.swift */; };
 		8D378FE929F72B3C000179D2 /* JewelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D378FE829F72B3C000179D2 /* JewelNode.swift */; };
@@ -54,6 +53,14 @@
 		8DD9BA8829E77C6E001A667D /* IndicatorViewAppearence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD9BA8329E77C6E001A667D /* IndicatorViewAppearence.swift */; };
 		8DD9BA8929E77C6E001A667D /* ExtensionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD9BA8429E77C6E001A667D /* ExtensionIndicatorView.swift */; };
 		8DD9BA8A29E77C6E001A667D /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD9BA8529E77C6E001A667D /* AlertView.xib */; };
+		8DE35B522A5113F500508672 /* Level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B512A5113F500508672 /* Level3.sks */; };
+		8DE35B5A2A5115EA00508672 /* Level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B532A5115EA00508672 /* Level6.sks */; };
+		8DE35B5B2A5115EA00508672 /* Level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B542A5115EA00508672 /* Level8.sks */; };
+		8DE35B5C2A5115EA00508672 /* Level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B552A5115EA00508672 /* Level4.sks */; };
+		8DE35B5D2A5115EA00508672 /* Level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B562A5115EA00508672 /* Level5.sks */; };
+		8DE35B5E2A5115EA00508672 /* Level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B572A5115EA00508672 /* Level7.sks */; };
+		8DE35B5F2A5115EA00508672 /* Level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B582A5115EA00508672 /* Level9.sks */; };
+		8DE35B602A5115EA00508672 /* Level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DE35B592A5115EA00508672 /* Level10.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,9 +76,8 @@
 		8D378FCC29F66718000179D2 /* hitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitSound.wav; sourceTree = "<group>"; };
 		8D378FD429F66761000179D2 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		8D378FD629F667B3000179D2 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
-		8D378FD929F66BC8000179D2 /* Level1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level1.swift; sourceTree = "<group>"; };
+		8D378FD929F66BC8000179D2 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		8D378FDB29F66BFD000179D2 /* Extensions_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_GameScene.swift; sourceTree = "<group>"; };
-		8D378FDE29F66D94000179D2 /* Level2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level2.swift; sourceTree = "<group>"; };
 		8D378FE229F66F07000179D2 /* Level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level2.sks; sourceTree = "<group>"; };
 		8D378FE629F7168B000179D2 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		8D378FE829F72B3C000179D2 /* JewelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelNode.swift; sourceTree = "<group>"; };
@@ -105,6 +111,14 @@
 		8DD9BA8329E77C6E001A667D /* IndicatorViewAppearence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorViewAppearence.swift; sourceTree = "<group>"; };
 		8DD9BA8429E77C6E001A667D /* ExtensionIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionIndicatorView.swift; sourceTree = "<group>"; };
 		8DD9BA8529E77C6E001A667D /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		8DE35B512A5113F500508672 /* Level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level3.sks; sourceTree = "<group>"; };
+		8DE35B532A5115EA00508672 /* Level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level6.sks; sourceTree = "<group>"; };
+		8DE35B542A5115EA00508672 /* Level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level8.sks; sourceTree = "<group>"; };
+		8DE35B552A5115EA00508672 /* Level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level4.sks; sourceTree = "<group>"; };
+		8DE35B562A5115EA00508672 /* Level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level5.sks; sourceTree = "<group>"; };
+		8DE35B572A5115EA00508672 /* Level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level7.sks; sourceTree = "<group>"; };
+		8DE35B582A5115EA00508672 /* Level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level9.sks; sourceTree = "<group>"; };
+		8DE35B592A5115EA00508672 /* Level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level10.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,10 +158,17 @@
 		8D378FDD29F66C94000179D2 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				8D378FD929F66BC8000179D2 /* Level1.swift */,
+				8D378FD929F66BC8000179D2 /* Levels.swift */,
 				8D61738229D9ECDB008F6607 /* Level1.sks */,
-				8D378FDE29F66D94000179D2 /* Level2.swift */,
 				8D378FE229F66F07000179D2 /* Level2.sks */,
+				8DE35B512A5113F500508672 /* Level3.sks */,
+				8DE35B552A5115EA00508672 /* Level4.sks */,
+				8DE35B562A5115EA00508672 /* Level5.sks */,
+				8DE35B532A5115EA00508672 /* Level6.sks */,
+				8DE35B572A5115EA00508672 /* Level7.sks */,
+				8DE35B542A5115EA00508672 /* Level8.sks */,
+				8DE35B582A5115EA00508672 /* Level9.sks */,
+				8DE35B592A5115EA00508672 /* Level10.sks */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -394,16 +415,24 @@
 				8D378FD529F66761000179D2 /* GameOver.sks in Resources */,
 				8D61738329D9ECDB008F6607 /* Level1.sks in Resources */,
 				8D378FD129F66718000179D2 /* meteorFallingSound.wav in Resources */,
+				8DE35B5E2A5115EA00508672 /* Level7.sks in Resources */,
 				8D378FCD29F66718000179D2 /* rewardSound.wav in Resources */,
 				8D378FE329F66F07000179D2 /* Level2.sks in Resources */,
 				8D61738E29D9ECDC008F6607 /* Assets.xcassets in Resources */,
+				8DE35B5A2A5115EA00508672 /* Level6.sks in Resources */,
+				8DE35B5B2A5115EA00508672 /* Level8.sks in Resources */,
 				8DD9BA8A29E77C6E001A667D /* AlertView.xib in Resources */,
 				8D378FD229F66718000179D2 /* jumpSound.wav in Resources */,
+				8DE35B5F2A5115EA00508672 /* Level9.sks in Resources */,
+				8DE35B522A5113F500508672 /* Level3.sks in Resources */,
+				8DE35B5D2A5115EA00508672 /* Level5.sks in Resources */,
 				8D378FD329F66718000179D2 /* hitSound.wav in Resources */,
 				8D61739129D9ECDC008F6607 /* LaunchScreen.storyboard in Resources */,
 				8D378FD029F66718000179D2 /* levelUpSound.wav in Resources */,
 				8D378FCF29F66718000179D2 /* meteorFallingSound.m4a in Resources */,
+				8DE35B602A5115EA00508672 /* Level10.sks in Resources */,
 				8D378FCE29F66718000179D2 /* music.wav in Resources */,
+				8DE35B5C2A5115EA00508672 /* Level4.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,8 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D378FDA29F66BC8000179D2 /* Level1.swift in Sources */,
-				8D378FDF29F66D94000179D2 /* Level2.swift in Sources */,
+				8D378FDA29F66BC8000179D2 /* Levels.swift in Sources */,
 				8D487A0C2A4FB75900A4EC75 /* Settings.swift in Sources */,
 				8DD9BA8729E77C6E001A667D /* Appearence.swift in Sources */,
 				8D487A092A4FB4BD00A4EC75 /* DB.swift in Sources */,

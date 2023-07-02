@@ -185,7 +185,7 @@ class PlayerNode: SKSpriteNode {
         state.enter(IdleState.self)
         if let _ = self as? EnemyNode {
           //  difficulty = .init()
-            self.lifes = 3 * (difficulty.n + 1)
+            self.lifes = 2 * (difficulty.n + 1)
         } else {
             difficulty = .light
         }
