@@ -30,17 +30,20 @@ class EnemyNode:PlayerNode {
     func randomWalking() {
         self.walk {
             Timer.scheduledTimer(withTimeInterval: self.walkCount <= 100 ? 0 : 5, repeats: false, block: { _ in
-                if !self.died {
-                    self.randomWalking()
+                if !self.isPaused {
+                    if !self.died {
+                        self.randomWalking()
+                    }
+                    if self.walkCount > 100 {
+                        self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
+                        self.walkCount = 0
+                    }
+                    if self.shootingFromRight != self.walkDirRight {
+                        self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
+                        self.walkCount = 0
+                    }
                 }
-                if self.walkCount > 100 {
-                    self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
-                    self.walkCount = 0
-                }
-                if self.shootingFromRight != self.walkDirRight {
-                    self.walkDirRight = self.shootingFromRight ?? self.walkDirHolder
-                    self.walkCount = 0
-                }
+                
                 
             })
         }

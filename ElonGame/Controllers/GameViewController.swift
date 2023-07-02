@@ -77,6 +77,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func reloadPressed(_ sender: Any) {
+        scene?.pause()
         SettingsVC.present(in: self)
         
     }

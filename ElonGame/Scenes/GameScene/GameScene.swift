@@ -94,5 +94,23 @@ class GameScene: SuperScene {
         loseHeart()
     }
     
+  //  var pausedOn = false
+    func pause(_ pause:Bool = true) {
+        isPaused = pause
+        enumerateChildNodes(withName: "meteor", using: {node,point in
+            node.physicsBody?.affectedByGravity = !pause
+        })
+        
+        enumerateChildNodes(withName: "enemy", using: {node,point in
+            if let enemy = node as? EnemyNode {
+                enemy.isPaused = pause
+                node.physicsBody?.affectedByGravity = !pause
+                if !pause {
+                    enemy.randomWalking()
+                }
+            }
+        })
+    }
+    
 }
 

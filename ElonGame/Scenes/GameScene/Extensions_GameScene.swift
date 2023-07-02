@@ -208,7 +208,7 @@ extension GameScene {
     func setupMeteor() {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { timer in
             if self.presenting {
-                if DB.holder?.settings.game.enubleMeteors ?? false {
+                if (DB.holder?.settings.game.enubleMeteors ?? false) && !self.isPaused {
                     self.spawnMeteor()
                 }
                 

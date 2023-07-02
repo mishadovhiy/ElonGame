@@ -27,6 +27,7 @@ class SettingsVC: UIViewController {
         if needReload {
             GameViewController.shared?.reloadPressed(force: true)
         }
+        GameViewController.shared?.scene?.pause(false)
     }
     
     func createData() -> [SettingsData] {
@@ -46,7 +47,7 @@ class SettingsVC: UIViewController {
                 .init(name: "player super speed", switchData: .init(isOn: data.game.canFast, switched: {
                     self.db?.settings.game.canFast = $0
                 })),
-                .init(name: "contact: meteor - player", switchData: .init(isOn: data.game.contactMeteorEnemy, switched: {
+                .init(name: "contact: meteor - enemy", switchData: .init(isOn: data.game.contactMeteorEnemy, switched: {
                     self.db?.settings.game.contactMeteorEnemy = $0
                 })),
                 .init(name: "need background sound", switchData: .init(isOn: data.game.backgroundSound, switched: {
