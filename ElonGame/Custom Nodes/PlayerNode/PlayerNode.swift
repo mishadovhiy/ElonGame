@@ -11,7 +11,7 @@ protocol PlayerNodeProtocol {
     func enemyDied()
 }
 class PlayerNode: SKSpriteNode {
-    var lifes = 5
+    var lifes = 8
     private let regularSpeed: CGFloat = 5
     var isFacingRight = true
     var walkingSpeed:CGFloat {
@@ -128,6 +128,10 @@ class PlayerNode: SKSpriteNode {
             invincible()
         } else  {
             die()
+        }
+        
+        if let enemy = self as? EnemyNode {
+            enemy.scoreChanged(lifes)
         }
     }
     

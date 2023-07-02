@@ -84,8 +84,11 @@ class GameScene: SuperScene {
                 GameViewController.shared?.currentScene += 1
             }
             run(Sound.levelUp.action)
-            GameViewController.shared?.loadScene(i:GameViewController.shared?.currentScene ?? 0)
+            
             removeFromParent()
+            DispatchQueue.main.async {
+                GameViewController.shared?.loadScene(i:GameViewController.shared?.currentScene ?? 0)
+            }
         }
     }
     

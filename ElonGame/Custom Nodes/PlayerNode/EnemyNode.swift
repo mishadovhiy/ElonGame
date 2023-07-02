@@ -10,11 +10,34 @@ import GameplayKit
 
 class EnemyNode:PlayerNode {
     
+    let scoreLabel:SKLabelNode = .init()
     private var isMoving = false
     private var walkCount = 0
     private var walkDirRight:Bool = .random()
 
     var walkDirHolder:Bool = false
+    
+    override func sceneMoved() {
+        super.sceneMoved()
+        self.walkDirHolder = walkDirRight
+        self.createRangeView()
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
+            self.randomWalking()
+            
+            Timer.scheduledTimer(withTimeInterval: 3.5 - Double(self.difficulty.n), repeats: true, block: { timer in
+                let can = self.shootingFromRight != nil && !self.died && DB.holder?.settings.game.enamieCanShoot ?? false
+                if can {
+                    self.spawnBullet()
+                }
+                if self.died {
+                    timer.invalidate()
+                }
+            })
+            
+            
+        })
+        
+    }
     
     func walk(completion:@escaping()->()) {
         isMoving = true
@@ -60,23 +83,21 @@ class EnemyNode:PlayerNode {
         
     }
     
-    override func sceneMoved() {
-        super.sceneMoved()
-        self.walkDirHolder = walkDirRight
-        Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
-            self.randomWalking()
-            
-            Timer.scheduledTimer(withTimeInterval: 3.5 - Double(self.difficulty.n), repeats: true, block: { timer in
-                let can = self.shootingFromRight != nil && !self.died && DB.holder?.settings.game.enamieCanShoot ?? false
-                if can {
-                    self.spawnBullet()
-                }
-                if self.died {
-                    timer.invalidate()
-                }
-            })
-            
-        })
+    
+    
+    
+    func createRangeView() {
+        scoreLabel.position = .init(x: 0, y: 0)
+        scoreLabel.fontColor = .orange
+        scoreLabel.fontSize = 16
+        scoreLabel.fontName = "AvenirNext-Bold"
+        scoreLabel.horizontalAlignmentMode = .center
+        scoreLabel.text = "\(self.lifes)"
+        addChild(scoreLabel)
+    }
+    
+    func scoreChanged(_ newValue:Int) {
+        scoreLabel.text = "\(self.lifes)"
     }
     
 }
