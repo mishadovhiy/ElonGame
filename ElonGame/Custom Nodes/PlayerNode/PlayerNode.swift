@@ -58,12 +58,12 @@ class PlayerNode: SKSpriteNode {
         Bullet.player = self
         Bullet.name = "bullet"
         Bullet.color = .red
-        let val = specialAbility[.superShoot] ?? false
-        Bullet.size = .init(width: val ? 50 : 20, height: val ? 45 : 15)
+        let isBig = specialAbility[.superShoot] ?? false
+        Bullet.size = .init(width: isBig ? 50 : 20, height: isBig ? 45 : 15)
         Bullet.position = CGPoint(x: self.position.x + (50 * (isFacingRight ? 1 : -1)), y: self.position.y)
-        let toX = (val ? 100 : 20) * (isFacingRight ? 1 : -1)
+        let toX = (isBig ? 100 : 20) * (isFacingRight ? 1 : -1)
         //let action = SKAction.moveTo(x: toX, duration: 3)
-        let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: 1)
+        let action = SKAction.applyImpulse(.init(dx: toX, dy: 0), at: .init(x: 3, y: 0), duration: isBig ? 3 : 1)
         
         // SKAction.applyForce(.init(dx: 5 * (isFacingRight ? 1 : -1), dy: 0), duration: 10)
         let actionDone = SKAction.run {
@@ -97,11 +97,12 @@ class PlayerNode: SKSpriteNode {
     
     
     func die() {
+        self.died = true
         let dieAction = SKAction.move(to: CGPoint(x: -300, y: 0), duration: 0.1)
         
         self.run(dieAction)
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { _ in
-            self.died = true
+            
             self.delegate?.enemyDied()
             self.removeFromParent()
         })
@@ -230,5 +231,13 @@ class PlayerNode: SKSpriteNode {
     private func startSuperTimer(key:PlayerAbility, time:TimeInterval, ended:(()->())? = nil) {
         self.startSuper(key: key.rawValue, time: time, ended: ended)
     }
+    
+    func update(_ currentTime: TimeInterval) {
+        if self.position.y ?? 0 <= -5000 && !died {
+            print("rgefdwes")
+            self.die()
+        }
+    }
+    
 }
 

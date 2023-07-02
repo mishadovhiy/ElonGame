@@ -23,6 +23,11 @@ extension GameScene {
         if player?.position.y ?? 0 <= -5000 {
             self.showDieScene()
         }
+        enumerateChildNodes(withName: "enemy", using: {node,point in
+            if let enemy = node as? EnemyNode {
+                enemy.update(currentTime)
+            }
+        })
     }
     
     

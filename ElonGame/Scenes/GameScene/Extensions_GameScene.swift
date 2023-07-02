@@ -23,7 +23,7 @@ extension GameScene {
     func increesScore() {
         self.score += 1
         print("scoreeee: ", score)
-        self.scoreLabel.text = "\(score)"
+        self.scoreLabel.text = "\(score) / \(rewardCount)"
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
             self.checkNextScene()
         })
@@ -79,6 +79,7 @@ extension GameScene {
         let width = (childNode(withName: "flour")?.frame.width ?? 0) / CGFloat(count)
         
         for i in 0..<count {
+            self.rewardCount += 1
             let enemy = EnemyNode(imageNamed: "player/0")
             let dific = enemy.difficulty
             
@@ -168,7 +169,7 @@ extension GameScene {
         scoreLabel.fontSize = 24
         scoreLabel.fontName = "AvenirNext-Bold"
         scoreLabel.horizontalAlignmentMode = .right
-        scoreLabel.text = "\(score)"
+        scoreLabel.text = "\(score) / \(rewardCount)"
         addChild(scoreLabel)
         
         
@@ -222,7 +223,7 @@ extension GameScene {
 
 extension GameScene:PlayerNodeProtocol {
     func enemyDied() {
-        //   increesScore()
+         increesScore()
     }
     
     
