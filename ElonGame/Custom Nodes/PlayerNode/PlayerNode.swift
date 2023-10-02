@@ -45,8 +45,46 @@ class PlayerNode: SKSpriteNode {
             return false
         }
     }
+    override var texture: SKTexture? {
+        get {
+            return super.texture
+        }
+        set {
+            super.texture = newValue
+            if updatingDamage {
+                updatingDamage = false
+            } else {
+                setDamaged()
+            }
+        }
+    }
     
+    private func setDamaged() {
+        self.damages.forEach({
+            self.removeShapeFromTexture(shapeRect: $0, set: false)
+
+        })
+    }
     
+    override func run(_ action: SKAction, withKey key: String) {
+        super.run(action, withKey: key)
+        
+        if key == PlayerSTateKeys.characterAnimationKey {
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: { _ in
+                self.setDamaged()
+            })
+            
+        }
+    }
+    
+    private var damages:[CGRect] = []
+    var updatingDamage = false
+    override func removeShapeFromTexture(shapeRect: CGRect, set:Bool = true) {
+        if set {
+            self.damages.append(shapeRect)
+        }
+        super.removeShapeFromTexture(shapeRect: shapeRect, set: set)
+    }
     
     func spawnBullet(){
         if !canSpawnBullets { return }
