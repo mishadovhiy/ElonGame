@@ -5,6 +5,6 @@
 
 
 player can:
-shot, collect SKNodes, jump, fast run
+shot, collect SKNodes, jump, fast run<br>
 bb killed by:
 enemies, meteors, by falling down
