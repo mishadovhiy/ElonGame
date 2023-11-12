@@ -16,6 +16,7 @@ extension GameScene:SKPhysicsContactDelegate {
         
         
         if collisions.matches(.player, .ground) {
+            self.jumpPressed = 0
             if let _ = contact.matched(name: "player") {
                 player?.state.enter(LandingState.self)
                 print(contact.collisionImpulse, " fdyjgukhj")

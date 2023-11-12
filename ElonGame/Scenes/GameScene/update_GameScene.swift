@@ -32,8 +32,15 @@ extension GameScene {
     
     
     private func movePlayer(_ deltaTime:TimeInterval) {
-        guard let joystickKnob = joystickKnob else { return }
-        player?.move(xPosition: joystickKnob.position.x, deltaTime: deltaTime)
+        if let joystic = controllerPressedHolder,
+           let direction = joystic.0.walking {
+            print(direction, " frwedw")
+            player?.move(direction, move: CGFloat(joystic.1 * (5.5 * (direction == .left ? -1 : 1))))
+        } else {
+            guard let joystickKnob = joystickKnob else { return }
+            player?.move(xPosition: joystickKnob.position.x, deltaTime: deltaTime)
+        }
+        
     }
     
     private func moveCamera() {

@@ -23,8 +23,6 @@ extension GameScene {
             if !joystic.contains(joysticLocation) {
                 jumpTouched = true
                 player?.state.enter(JumpingState.self)
-                
-
             }
         }
     }

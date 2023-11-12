@@ -51,40 +51,22 @@ class PlayerNode: SKSpriteNode {
         }
         set {
             super.texture = newValue
-            if updatingDamage {
-                updatingDamage = false
-            } else {
-                setDamaged()
-            }
         }
     }
-    
-    private func setDamaged() {
-        self.damages.forEach({
-            self.removeShapeFromTexture(shapeRect: $0, set: false)
 
-        })
-    }
     
     override func run(_ action: SKAction, withKey key: String) {
         super.run(action, withKey: key)
         
         if key == PlayerSTateKeys.characterAnimationKey {
-            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: { _ in
-                self.setDamaged()
-            })
+//            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: { _ in
+//                self.setDamaged()
+//            })
             
         }
     }
     
-    private var damages:[CGRect] = []
-    var updatingDamage = false
-    override func removeShapeFromTexture(shapeRect: CGRect, set:Bool = true) {
-        if set {
-            self.damages.append(shapeRect)
-        }
-        super.removeShapeFromTexture(shapeRect: shapeRect, set: set)
-    }
+
     
     func spawnBullet(){
         if !canSpawnBullets { return }
@@ -194,21 +176,26 @@ class PlayerNode: SKSpriteNode {
     func jump(isSecond:Bool = false) {
         self.run(.applyForce(CGVector(dx: 0, dy: !isSecond ? 350 : 400), duration: 0.1))
         self.run(Sound.jump.action)
+      //  self.state.enter(JumpingState.self)
+
      //   state.enter(JumpingState.self)
     }
     
     func move(xPosition:CGFloat, deltaTime: TimeInterval, duration:TimeInterval = 0) {
-        if floor(xPosition.positive) != 0 {
+        let moveDX = deltaTime * xPosition * walkingSpeed
+        move((xPosition == 0 ? (isFacingRight ? .right : .left) : (xPosition > 0 ? .right : .left)), move: moveDX, duration: duration)
+    }
+
+    func move(_ direction:WalkingDirection, move:CGFloat, duration:TimeInterval = 0) {
+        if move != 0 {
             state.enter(WalkingState.self)
         } else {
             state.enter(IdleState.self)
         }
-        
-        let move = SKAction.move(by: .init(dx: deltaTime * xPosition * walkingSpeed, dy: 0), duration: duration)
-
+        let move = SKAction.move(by: .init(dx: move, dy: 0), duration: duration)
         let faceAction : SKAction!
-        let movingRight = xPosition > 0
-        let movingLeft = xPosition < 0
+        let movingRight = direction == .right
+        let movingLeft = direction == .left
         if movingLeft && isFacingRight {
             isFacingRight = false
             let faceMovement = SKAction.scaleX(to: -1, duration: 0)
@@ -223,7 +210,7 @@ class PlayerNode: SKSpriteNode {
         self.run(faceAction)
     }
 
-
+    
     var difficulty:Difficulty = .init()
     func sceneMoved() {
         state = GKStateMachine(states: [
@@ -240,16 +227,6 @@ class PlayerNode: SKSpriteNode {
         } else {
             difficulty = .light
         }
-    }
-
-    enum PlayerAbility:String {
-        case superSpeed = "superSpeed"
-        case invisible = "invisible"
-        case superInvisible = "superInvisible"
-
-        case superShoot = "superShoot"
-        case shootReceived = "shootReceived"
-        case meteorReceived = "meteorReceived"
     }
 
     
@@ -279,3 +256,18 @@ class PlayerNode: SKSpriteNode {
     
 }
 
+extension PlayerNode {
+    enum WalkingDirection {
+        case left, right
+    }
+    
+    enum PlayerAbility:String {
+        case superSpeed = "superSpeed"
+        case invisible = "invisible"
+        case superInvisible = "superInvisible"
+
+        case superShoot = "superShoot"
+        case shootReceived = "shootReceived"
+        case meteorReceived = "meteorReceived"
+    }
+}
