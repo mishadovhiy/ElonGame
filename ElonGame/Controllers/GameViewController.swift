@@ -9,7 +9,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import GameController
-
+ 
 class GameViewController: UIViewController {
     
     @IBOutlet weak var fireButton: UIButton!
