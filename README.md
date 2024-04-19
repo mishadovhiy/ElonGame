@@ -1,4 +1,3 @@
-
 player can:<br>
 shot, collect SKNodes, jump, fast run<br>
 be killed by:<br>
